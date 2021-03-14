@@ -4,9 +4,13 @@ public class Ingredient {
 
 	private String ingredientName;
 	
-	public Ingredient(String ingredientName) {
+	private boolean able;
+	
+	public Ingredient(String ingredientName, boolean able) {
 	
 		this.ingredientName = ingredientName;
+		this.setAble(able);
+		
 		
 	}
 	public String getIngredintName() {
@@ -15,6 +19,12 @@ public class Ingredient {
 	public void setIngredientName(String ingredientName) {
 		this.ingredientName = ingredientName;
 		
+	}
+	public boolean isAble() {
+		return able;
+	}
+	public void setAble(boolean able) {
+		this.able = able;
 	}
 	
 }

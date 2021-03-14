@@ -4,17 +4,17 @@ public class Product {
 
 	private String name;
 	
-	private double price;
+	private double [] prices;
 	
-	private String size;
+	private String [] sizes;
 	
-	public Product(String name, double price, String size) {
+	public Product(String name, double [] prices, String [] sizes) {
 	
 		this.name = name;
 		
-		this.price = price;
+		this.prices = prices;
 		
-		this.size = size;
+		this.sizes = sizes;
 	}
 	public String getName() {
 		return name;
@@ -22,18 +22,18 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public double getPrice() {
-		return price;
+	public double [] getPrices() {
+		return prices;
 	}
-	public void setPrice(double price) {
+	public void setPrice(double [] prices) {
 		
-		this.price = price;
+		this.prices = prices;
 		
 	}
-	public String getSize() {
-		return size;
+	public String [] getSize() {
+		return sizes;
 	}
-	public void setSize(String size) {
-		this.size = size;
+	public void setSize(String [] sizes) {
+		this.sizes = sizes;
 	}
 }

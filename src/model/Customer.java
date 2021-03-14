@@ -1,13 +1,7 @@
 package model;
 
-public class Customer {
+public class Customer extends Person{
 
-	private String names;
-	
-	private String lastNames;
-	
-	private String identificatorNumber;
-	
 	private String addres;
 	
 	private String phoneNumber;
@@ -15,18 +9,15 @@ public class Customer {
 	private String comment;
 	
 		public Customer(String names,String lastNames,String identificatorNumber, String addres, String phoneNumber, String comment ) {
-	
-		this.setNames(names);
+			
+				super(names,lastNames,identificatorNumber);
 		
-		this.setLastNames(lastNames);
 		
-		this.setIdentificatorNumber(identificatorNumber);
+		this.addres = addres;
 		
-		this.setAddres(addres);
+		this.phoneNumber = phoneNumber;
 		
-		this.setPhoneNumber(phoneNumber);
-		
-		this.setComment(comment);
+		this.comment = comment;
 	
 		}
 
@@ -77,4 +68,5 @@ public class Customer {
 		public void setComment(String comment) {
 			this.comment = comment;
 		}
+		
 	}

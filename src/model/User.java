@@ -10,21 +10,14 @@ public class User extends Employee{
 	
 	public User(String name, String lastName, String identificatorNumber, String userName, String password) {
 		super(name, lastName, identificatorNumber);
+			
 		
-		this.name = name;
+		this.userName = userName;
 		
-		this.lastName = lastName;
-		
-		this.identificatorNumber = identificatorNumber;
-		
-		this.setUserName(userName);
-		
-		this.setPassword(password);
+		this.password = password;
 		
 	
 	}
-
-
 
 	public String getUserName() {
 		return userName;
