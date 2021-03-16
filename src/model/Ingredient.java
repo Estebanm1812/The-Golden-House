@@ -6,12 +6,16 @@ public class Ingredient {
 	
 	private boolean able;
 	
-	public Ingredient(String ingredientName, boolean able) {
+	private String creator;
+	
+	private String lastModifie;
+	
+	public Ingredient(String ingredientName, String creator) {
 	
 		this.ingredientName = ingredientName;
 		this.setAble(able);
-		
-		
+		this.setCreator(creator);
+		setLastModifie("");
 	}
 	public String getIngredintName() {
 		return ingredientName;
@@ -25,6 +29,18 @@ public class Ingredient {
 	}
 	public void setAble(boolean able) {
 		this.able = able;
+	}
+	public String getCreator() {
+		return creator;
+	}
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
+	public String getLastModifie() {
+		return lastModifie;
+	}
+	public void setLastModifie(String lastModifie) {
+		this.lastModifie = lastModifie;
 	}
 	
 }

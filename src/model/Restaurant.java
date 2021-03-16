@@ -19,7 +19,7 @@ public class Restaurant {
 		
 		employersList = new ArrayList<Employee>();
 		
-		ingredientsList = new ArrayList<Ingredient>();
+		setIngredientsList(new ArrayList<Ingredient>());
 		
 		userList = new ArrayList<User>();
 		
@@ -41,12 +41,54 @@ public class Restaurant {
 		employersList.add(em1);
 		
 	}
-	public void addUser(String name, String lastName, String identificatorNumber, String userName, String password) {
+	public boolean addUser(String name, String lastName, String identificatorNumber, String userName, String password) {
 		
 		User user1 = new User(name, lastName, identificatorNumber, userName, password);
 		
-		userList.add(user1);
+		boolean found = false;
 		
+		for(int i=0; i < userList.size() && (found==false);i++) {
+		
+			if((userList.get(i).getNames().equals(name))&&(userList.get(i).getLastNames().equals(lastName))&&(userList.get(i).getIdentificatorNumber().equals(identificatorNumber))) {
+			
+				found = true;
+				
+			}
+			
+			
+		}
+		if(found==true) {
+		
+		userList.add(user1);
+		}
+		return found;
+		
+	}
+	public boolean addIngredient(String name, String creator) {
+		
+		boolean avaible = true; 
+		
+		for(int i=0; i <ingredientsList.size()&& (avaible==true);i++) {
+		
+			if(ingredientsList.get(i).getIngredintName().equals(name)) {
+			
+				avaible = false;
+			}
+			
+		}
+		if(avaible == true){
+			
+			Ingredient ingredient = new Ingredient(name, creator);
+			
+			ingredientsList.add(ingredient);
+		}
+		return avaible;
+	}
+	public ArrayList<Ingredient> getIngredientsList() {
+		return ingredientsList;
+	}
+	public void setIngredientsList(ArrayList<Ingredient> ingredientsList) {
+		this.ingredientsList = ingredientsList;
 	}
 	
 	
