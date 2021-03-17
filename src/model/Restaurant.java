@@ -84,6 +84,20 @@ public class Restaurant {
 		}
 		return avaible;
 	}
+	public boolean findUser(String userName, String password) {
+		
+		boolean answer = false;
+		
+		for(int i=0; i < userList.size() && (answer==false);i++) {
+		
+			if((userList.get(i).getUserName().equals(userName)) && (userList.get(i).getPassword().equals(password))) {
+				
+				answer = true;
+			}
+	
+		}
+		return answer;
+	}
 	public ArrayList<Ingredient> getIngredientsList() {
 		return ingredientsList;
 	}

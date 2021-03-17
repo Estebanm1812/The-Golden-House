@@ -29,26 +29,26 @@
         </rowConstraints>
          <children>
             <Label prefHeight="17.0" prefWidth="82.0" style="-fx-background-color: gold;" text="Nombres:" translateX="100.0" />
-            <TextField GridPane.columnIndex="1" />
+            <TextField fx:id="userCreationNameTxT" GridPane.columnIndex="1" />
             <Label layoutX="10.0" layoutY="31.0" prefHeight="17.0" prefWidth="82.0" style="-fx-background-color: gold;" text="Apellidos" translateX="100.0" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="userCreationLastNameTxT" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="userCreationIdTxT" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="userCreationUserNameTxT" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label layoutX="10.0" layoutY="77.0" maxWidth="-Infinity" prefHeight="17.0" prefWidth="92.0" style="-fx-background-color: gold;" text="NºIdentificacion:" translateX="100.0" GridPane.rowIndex="2" />
             <Label layoutX="10.0" layoutY="127.0" maxWidth="-Infinity" prefHeight="17.0" prefWidth="115.0" style="-fx-background-color: gold;" text="Nombre de Usuario:" translateX="80.0" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="userCreationPasswordTxT" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label layoutX="10.0" layoutY="177.0" maxWidth="-Infinity" prefHeight="17.0" prefWidth="80.0" style="-fx-background-color: gold;" text="Contraseña:" translateX="110.0" GridPane.rowIndex="4" />
             <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="57.0" prefWidth="244.0" style="-fx-background-color: gold;" text=" deben concordar con un empleado activo" textOverrun="LEADING_WORD_ELLIPSIS" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <font>
                   <Font name="System Italic" size="11.0" />
                </font>
             </Label>
-            <Label layoutX="210.0" layoutY="296.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="57.0" prefWidth="53.0" style="-fx-background-color: gold;" text="     los datos" textOverrun="LEADING_WORD_ELLIPSIS" translateX="150.0" GridPane.rowIndex="5">
+            <Label layoutX="210.0" layoutY="296.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="57.0" prefWidth="50.0" style="-fx-background-color: gold;" text="     los datos" textOverrun="LEADING_WORD_ELLIPSIS" translateX="150.0" GridPane.rowIndex="5">
                <font>
                   <Font name="System Italic" size="11.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: gold;" text="Crear" translateX="40.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Button mnemonicParsing="false" onAction="#createUser" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: gold;" text="Crear" translateX="40.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Button layoutX="210.0" layoutY="369.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: gold;" text="Volver" translateX="120.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>

@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.PasswordField;
 import javafx.scene.layout.BorderPane;
 import model.Restaurant;
 
@@ -38,6 +39,12 @@ public class RestaurantGUI {
 
     @FXML
     private TextField userCreationPasswordTxT;
+    
+    @FXML
+    private TextField userLoginTxT;
+
+    @FXML
+    private PasswordField passwordLoginTxT;
 
 	
 	public RestaurantGUI(Restaurant restaurant) {
@@ -116,6 +123,46 @@ public class RestaurantGUI {
 			 	}
 	    }
 	 } 
-	
+
+	 @FXML
+	 public void LogIn(ActionEvent event) throws IOException {
+
+		 String userName = userLoginTxT.getText().trim();
+		 
+		 String password = passwordLoginTxT.getText().trim();
+		 
+		 
+		 if((userName.equals(""))||(password.equals(""))) {
+		 
+			 Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("Debe de llenar todos los datos");
+				alert.showAndWait();
+			 
+			 
+		 	}else {
+		 		
+		 		boolean enters = restaurant.findUser(userName, password);
+		 		
+		 			if(enters==true) {
+		 		
+		 			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+		 			Parent mainMenu = fxmlloader.load();
+		 			fxmlloader.setController(this);
+		 			pane.getChildren().clear();
+		 			pane.setCenter(mainMenu);	
+		 			}else {
+		 				
+		 				 Alert alert = new Alert(AlertType.INFORMATION);
+		 				alert.setTitle("Information Dialog");
+		 				alert.setHeaderText(null);
+		 				alert.setContentText("El usuario y/o contraseña estan errones, por favor verificar");
+		 				alert.showAndWait();
+		 			 
+		 				
+		 			}	
+		 	}
+	    }
 	
 }

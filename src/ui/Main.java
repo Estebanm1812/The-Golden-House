@@ -30,6 +30,7 @@ public class Main extends Application{
 		fxmlLoader.setController(restaurantGUI);
 		
 		fxmlLoader2.setController(restaurantGUI);
+		
 	    Parent loginPane = fxmlLoader.load();
 		
 		Parent root2 = fxmlLoader2.load();
