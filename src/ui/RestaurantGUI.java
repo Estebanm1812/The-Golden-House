@@ -16,12 +16,17 @@ import model.Restaurant;
 public class RestaurantGUI {
 	
 
+    @FXML
+    private BorderPane loginPane;
 		
     @FXML
     private BorderPane firstPane;
 	
     @FXML
     private BorderPane pane;
+    
+    @FXML
+    private BorderPane userCreationMainPane;
     
 	private Restaurant restaurant;
 	
@@ -60,8 +65,8 @@ public class RestaurantGUI {
 		this.pane = pane;
 	}
 	@FXML
-    public void toLoginPane(ActionEvent event) throws IOException {
-
+    public void login(ActionEvent event) throws IOException {
+		
 		FXMLLoader logInPane = new FXMLLoader(getClass().getResource("userLogin.fxml"));
 		
 		logInPane.setController(this);
@@ -69,9 +74,9 @@ public class RestaurantGUI {
 		Parent root1 = logInPane.load(); 
 		
 		
-		pane.getChildren().clear();
-		pane.setCenter(root1);
-		 
+		firstPane.getChildren().clear();
+		firstPane.setCenter(root1);
+	 
     }
 	 @FXML
 	 public void openUserCreationPane(ActionEvent event) throws IOException {
@@ -87,6 +92,7 @@ public class RestaurantGUI {
 			pane.setCenter(root1);
 		 
 	    }
+	 
 	 @FXML
 	 public void createUser(ActionEvent event) {
 		 
@@ -163,6 +169,20 @@ public class RestaurantGUI {
 		 				
 		 			}	
 		 	}
+	    }
+	 @FXML
+	 public void createUserAccount(ActionEvent event) throws IOException {
+
+		 FXMLLoader creationPane = new FXMLLoader(getClass().getResource("userCreationPane.fxml"));
+			
+			creationPane.setController(this);
+			
+			Parent root1 = creationPane.load(); 
+			
+			
+			loginPane.getChildren().clear();
+			loginPane.setCenter(root1);
+		 
 	    }
 	
 }

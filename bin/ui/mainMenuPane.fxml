@@ -38,17 +38,25 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Label layoutX="20.0" layoutY="48.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="156.0" style="-fx-background-color: gold;" text="Administracion de Personas" />
+                  <Button layoutX="20.0" layoutY="113.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Añadir Clientes" />
+                  <Button layoutX="20.0" layoutY="205.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Añadir Empleados" />
+                  <Button layoutX="20.0" layoutY="156.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Ver Lista De Clientes" />
+                  <Button layoutX="21.0" layoutY="253.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Ver Lista De Empleados" />
+                  <Button layoutX="21.0" layoutY="305.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Ver Lista de Usuarios" />
                </children>
             </AnchorPane>
           <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="373.0" prefWidth="231.0">
                <children>
                   <Label layoutX="26.0" layoutY="43.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="156.0" style="-fx-background-color: gold;" text="Administracion de Productos" />
-                  <Button layoutX="57.0" layoutY="131.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="94.0" text="Button" />
+                  <Button layoutX="27.0" layoutY="121.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Gestion de Ingredientes" />
+                  <Button layoutX="34.0" layoutY="205.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="140.0" text="Gestion De Productos" />
+                  <Button layoutX="27.0" layoutY="292.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Gestion de Tipos" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0" prefWidth="181.0">
                <children>
                   <Label layoutX="22.0" layoutY="42.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="156.0" style="-fx-background-color: gold;" text="Administracion de Pedidos" />
+                  <Button layoutX="22.0" layoutY="206.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Ver Lista De Pedidos" />
                </children>
             </AnchorPane>
         </items>
