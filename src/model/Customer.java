@@ -1,12 +1,17 @@
 package model;
 
-public class Customer extends Person{
+import java.io.Serializable;
+
+public class Customer extends Person implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private String addres;
 	
 	private String phoneNumber;
 	
 	private String comment;
+	
 	
 		public Customer(String names,String lastNames,String identificatorNumber, String addres, String phoneNumber, String comment ) {
 			

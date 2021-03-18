@@ -4,6 +4,14 @@ import java.util.ArrayList;
 
 public class Restaurant {
 	
+	public final static String CUSTOMERS_SAVE_PATH_FILE = "data/customers.csv";
+	
+	public final static String USERS_SAVE_PATH_FILE = "data/users.csv";
+	
+	public final static String EMPLOYEERS_SAVE_PATH_FILE = "data/employers.csv";
+	
+	public final static String DELIVERS_SAVE_PATH_FILE = "data/delivers.csv";
+	
 	private ArrayList<Customer> customersList;
 	
 	private ArrayList<Employee> employersList;
@@ -11,6 +19,8 @@ public class Restaurant {
 	private ArrayList<Ingredient> ingredientsList;
 	
 	private ArrayList<User> userList;
+	
+	
 	
 	
 	public Restaurant() {
