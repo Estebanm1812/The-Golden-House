@@ -15,16 +15,18 @@ public class Delivery implements Serializable{
 	
 	private Customer customer;
 	
+	private Employee employee;
+	
 	private Date date;
 	
-	public Delivery(String code, String state, Product[] productList, Customer customer, Date date) {
+	public Delivery(String code, String state, Product[] productList, Customer customer,Employee employee, Date date) {
 		
-		this.setCode(code);
-		this.setState(state);
-		this.setProductList(productList);
-		this.setCustomer(customer);
-		this.setDate(date);
-		
+		this.code = code;
+		this.state = state;
+		this.productList = productList;
+		this.customer = customer;
+		this.date = date;
+		this.employee = employee;
 	}
 
 	public String getCode() {
@@ -66,7 +68,13 @@ public class Delivery implements Serializable{
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+		
+	}
 	
 	
 }

@@ -1,6 +1,11 @@
 package model;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Restaurant {
 	
@@ -12,13 +17,13 @@ public class Restaurant {
 	
 	public final static String DELIVERS_SAVE_PATH_FILE = "data/delivers.csv";
 	
-	private ArrayList<Customer> customersList;
+	private List<Customer> customersList;
 	
-	private ArrayList<Employee> employersList;
+	private List<Employee> employersList;
 	
-	private ArrayList<Ingredient> ingredientsList;
+	private List<Ingredient> ingredientsList;
 	
-	private ArrayList<User> userList;
+	private List<User> userList;
 	
 	
 	
@@ -108,13 +113,39 @@ public class Restaurant {
 		}
 		return answer;
 	}
-	public ArrayList<Ingredient> getIngredientsList() {
+	public List<Ingredient> getIngredientsList() {
 		return ingredientsList;
 	}
 	public void setIngredientsList(ArrayList<Ingredient> ingredientsList) {
 		this.ingredientsList = ingredientsList;
 	}
-	
+	public List<Employee> getEmployeeList() {
+		return employersList;
+	}
+	public void setEmployeeList(ArrayList<Employee> employersList) {
+		this.employersList = employersList;
+	}
+	public void saveCustomerData() throws FileNotFoundException, IOException {
+		
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(CUSTOMERS_SAVE_PATH_FILE));
+		
+		oos.writeObject(customersList);
+		oos.close();
+	}
+	public void saveEmployeeData() throws FileNotFoundException, IOException {
+		
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(EMPLOYEERS_SAVE_PATH_FILE));
+		
+		oos.writeObject(employersList);
+		oos.close();
+	}
+	public void saveUsersData() throws FileNotFoundException, IOException {
+		
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(USERS_SAVE_PATH_FILE));
+		
+		oos.writeObject(userList);
+		oos.close();
+	}
 	
 	
 }

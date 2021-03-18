@@ -2,16 +2,24 @@ package ui;
 
 import java.io.IOException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import model.Employee;
+import model.Ingredient;
 import model.Restaurant;
+
 
 public class RestaurantGUI {
 	
@@ -21,12 +29,33 @@ public class RestaurantGUI {
 		
     @FXML
     private BorderPane firstPane;
+    
+    @FXML
+    private BorderPane ingredientListPane;
 	
     @FXML
     private BorderPane pane;
     
     @FXML
     private BorderPane userCreationMainPane;
+    
+    @FXML
+    private TableView<Ingredient> ingredientsList;
+    
+    @FXML
+    private BorderPane employeeListPane;
+
+    @FXML
+    private TableView<Employee> employeeTable;
+
+    @FXML
+    private TableColumn<Employee, String> employeeNameTable;
+
+    @FXML
+    private TableColumn<Employee, String> employeeLastNameTable;
+
+    @FXML
+    private TableColumn<Employee, String> employeeIDTable;
     
 	private Restaurant restaurant;
 	
@@ -47,6 +76,19 @@ public class RestaurantGUI {
     
     @FXML
     private TextField userLoginTxT;
+    
+    @FXML
+    private TableColumn<Ingredient, String> ingredientNameTable;
+
+    @FXML
+    private TableColumn<Ingredient, String> ingredientStateTable;
+
+    @FXML
+    private TableColumn<Ingredient, String> ingredientCreatorTable;
+
+    @FXML
+    private TableColumn<Ingredient, String> ingredientLastModifiedTable;
+
 
     @FXML
     private PasswordField passwordLoginTxT;
@@ -185,5 +227,57 @@ public class RestaurantGUI {
 		 
 	    }
 	 
+	 public void initializeIngredientList(){
+		 
+	ObservableList<Ingredient> observableList;
+	observableList = FXCollections.observableArrayList(restaurant.getIngredientsList());
+		 
+	ingredientsList.setItems(observableList);		
+		 
+	ingredientNameTable.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("name"));
+	ingredientStateTable.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("state") );
+	ingredientCreatorTable.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("creator")); 
+	ingredientLastModifiedTable.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("lastModifie"));
 	
+	 }
+	 @FXML
+	 public void loadIngredientsList(ActionEvent event) throws IOException {
+
+		 FXMLLoader fxml1 = new FXMLLoader(getClass().getResource("ingredientListPane.fxml"));
+		 fxml1.setController(this);
+		 
+		 Parent root1 = fxml1.load();
+		 
+		 ingredientListPane.getChildren().clear();
+		 ingredientListPane.getChildren().setAll(root1);
+		 initializeIngredientList();
+		 
+	    }
+	 public void initializeEmployeeList() {
+		 
+		ObservableList<Employee> observableList;
+		observableList = FXCollections.observableArrayList(restaurant.getEmployeeList());
+		 
+		employeeTable.setItems(observableList);
+		
+		employeeNameTable.setCellValueFactory(new PropertyValueFactory<Employee,String>("name"));
+		employeeLastNameTable.setCellValueFactory(new PropertyValueFactory<Employee,String>("lastName"));
+		employeeIDTable.setCellValueFactory(new PropertyValueFactory<Employee,String>("identificatorNumber"));
+	 
+	 }
+	 @FXML
+	 public void loadEmployeeList(ActionEvent event) throws IOException {
+
+		 FXMLLoader fxml1 = new FXMLLoader(getClass().getResource("employeeListPane.fxml"));
+		 fxml1.setController(this);
+		 
+		 Parent root1 = fxml1.load();
+		 
+		 employeeListPane.getChildren().clear();
+		 employeeListPane.getChildren().setAll(root1);
+		 initializeEmployeeList();
+		 
+	    }
+	 
+	 	
 }

@@ -13,9 +13,9 @@ public class Ingredient {
 	public Ingredient(String ingredientName, String creator) {
 	
 		this.ingredientName = ingredientName;
-		this.setAble(able);
-		this.setCreator(creator);
-		setLastModifie("");
+		able = true;
+		this.creator = creator;
+		lastModifie = creator;
 	}
 	public String getIngredintName() {
 		return ingredientName;
