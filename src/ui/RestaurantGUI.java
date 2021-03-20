@@ -24,6 +24,8 @@ import model.Restaurant;
 
 public class RestaurantGUI {
 	
+	 @FXML
+	private BorderPane mainMenuPane;
 
     @FXML
     private BorderPane loginPane;
@@ -36,6 +38,9 @@ public class RestaurantGUI {
 	
     @FXML
     private BorderPane pane;
+    
+    @FXML
+    private BorderPane CreateIngredientPane;
     
     @FXML
     private BorderPane userCreationMainPane;
@@ -223,7 +228,8 @@ public class RestaurantGUI {
 		 			Parent mainMenu = fxmlloader.load();
 		 			fxmlloader.setController(this);
 		 			pane.getChildren().clear();
-		 			pane.setCenter(mainMenu);	
+		 			pane.setCenter(mainMenu);
+		 			restaurant.setCurrentUser(userName);
 		 			}else {
 		 				
 		 				 Alert alert = new Alert(AlertType.INFORMATION);
@@ -365,8 +371,55 @@ public class RestaurantGUI {
 
 		 String name = ingredientNameTxT.getText().trim(); 
 		  
-		 boolean found = false;
+		 boolean found = restaurant.findIngredient(name);
+		 
+	
+		 	if(found == false) {
+		 		
+		 		
+		 		try {
+					restaurant.addIngredient(name, restaurant.getCurrentUser());
+				} catch (FileNotFoundException e) {
+					
+					e.printStackTrace();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+		 		Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("Ingrediente añadido exitosamente");
+				alert.showAndWait();
+		 	}else {
+		 		Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("El ingrediente ya existe");
+				alert.showAndWait();
+		 	}
 		 
 	    }
+	  @FXML
+	 public void loadIngredientCreationPane(ActionEvent event) throws IOException {
 
+		  FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("addIngredientPane.fxml"));
+		  fxmlloader.setController(this);
+		  Parent addIngredientPane = fxmlloader.load();
+		  
+		mainMenuPane.getChildren().clear();
+		mainMenuPane.getChildren().setAll(addIngredientPane);	
+		  
+		  
+	    }
+	  @FXML
+	  public void returnFromAddIngredient(ActionEvent event) throws IOException {
+
+
+		  FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+		  fxmlloader.setController(this);
+			Parent mainMenu = fxmlloader.load();
+			CreateIngredientPane.getChildren().clear();
+			CreateIngredientPane.setCenter(mainMenu);	
+	    }
 }
