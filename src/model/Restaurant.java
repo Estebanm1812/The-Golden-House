@@ -9,18 +9,24 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant {
 	
-	public final static String CUSTOMERS_SAVE_PATH_FILE = "data/customers.csv";
+	public final static String CUSTOMERS_SAVE_PATH_FILE = "data/customers.txt";
 	
-	public final static String USERS_SAVE_PATH_FILE = "data/users.csv";
+	public final static String USERS_SAVE_PATH_FILE = "data/users.txt";
 	
-	public final static String EMPLOYEERS_SAVE_PATH_FILE = "data/employers.csv";
+	public final static String EMPLOYEERS_SAVE_PATH_FILE = "data/employers.txt";
 	
-	public final static String DELIVERS_SAVE_PATH_FILE = "data/delivers.csv";
+	public final static String DELIVERS_SAVE_PATH_FILE = "data/delivers.txt";
+	
+	public final static String INGREDIENTS_SAVE_PATH_FILE = "data/ingredients.txt";
+	
+	public final static String PRODUCTS_SAVE_PATH_FILE = "data/products.txt";
 	
 	private List<Customer> customersList;
 	
@@ -32,38 +38,41 @@ public class Restaurant {
 	
 	private List<Delivery> deliveriesList;
 	
+	private List<Product> productList;
 	
-	public Restaurant() {
+	
+	public Restaurant(){
 		
 		customersList = new ArrayList<Customer>();
 		
 		employersList = new ArrayList<Employee>();
 		
-		setIngredientsList(new ArrayList<Ingredient>());
+		ingredientsList = new ArrayList<Ingredient>();
 		
 		userList = new ArrayList<User>();
 		
 		deliveriesList = new ArrayList<Delivery>();
 		
+		productList = new ArrayList<Product>();
 	}
-	public void addCustomer(String name, String lastName, String id, String addres, String phone, String comment) {
+	public void addCustomer(String name, String lastName, String id, String addres, String phone, String comment) throws FileNotFoundException, IOException {
 		
 		Customer customer1 = new Customer(name, lastName, id, addres, phone,comment);
 		
-		
-		
 		customersList.add(customer1);
-		
-		
+			
+		saveCustomerData();
 	}
-	public void addEmployee(String name, String lastName, String identificatorNumber) {
+	public void addEmployee(String name, String lastName, String identificatorNumber) throws FileNotFoundException, IOException {
 		
 		Employee em1 = new Employee(name, lastName, identificatorNumber);
 		
 		employersList.add(em1);
 		
+		saveEmployeeData();
+		
 	}
-	public boolean addUser(String name, String lastName, String identificatorNumber, String userName, String password) {
+	public boolean addUser(String name, String lastName, String identificatorNumber, String userName, String password) throws FileNotFoundException, IOException {
 		
 		User user1 = new User(name, lastName, identificatorNumber, userName, password);
 		
@@ -82,6 +91,7 @@ public class Restaurant {
 		if(found==true) {
 		
 		userList.add(user1);
+		saveUsersData();
 		}
 		return found;
 		
@@ -139,6 +149,14 @@ public class Restaurant {
 		oos.writeObject(customersList);
 		oos.close();
 	}
+	public void saveIngredientsData() throws FileNotFoundException, IOException {
+		
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(INGREDIENTS_SAVE_PATH_FILE));
+		
+		oos.writeObject(ingredientsList);
+		oos.close();
+	}
+	
 	public void saveEmployeeData() throws FileNotFoundException, IOException {
 		
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(EMPLOYEERS_SAVE_PATH_FILE));
@@ -160,8 +178,8 @@ public class Restaurant {
 		oos.writeObject(deliveriesList);
 		oos.close();
 	}
-	public void importEmployee(String fileName) throws IOException{
-		    BufferedReader br = new BufferedReader(new FileReader(fileName));
+	public void importEmployee() throws IOException{
+		    BufferedReader br = new BufferedReader(new FileReader(EMPLOYEERS_SAVE_PATH_FILE));
 		    String line = br.readLine();
 		    while(line!=null){
 		      String[] parts = line.split(";");
@@ -170,8 +188,18 @@ public class Restaurant {
 		    }
 		    br.close();
 		  }
-	public void importDelivery(String fileName) throws IOException{
+	public void importIngredients(String fileName) throws IOException{
 	    BufferedReader br = new BufferedReader(new FileReader(fileName));
+	    String line = br.readLine();
+	    while(line!=null){
+	      String[] parts = line.split(";");
+	      addIngredient(parts[0],parts[1]);
+	      line = br.readLine();
+	    }
+	    br.close();
+	  }
+	public void importDeliver() throws IOException{
+	    BufferedReader br = new BufferedReader(new FileReader(DELIVERS_SAVE_PATH_FILE));
 	    String line = br.readLine();
 	    while(line!=null){
 	      String[] parts = line.split(";");
@@ -204,38 +232,148 @@ public class Restaurant {
 	    }
 	    br.close();
 	  }
+	public void loadData(String path) throws IOException, ClassNotFoundException{
+		
+		File f;
+		
+		if(path.equals(CUSTOMERS_SAVE_PATH_FILE)) {
+		
+		f = new File(CUSTOMERS_SAVE_PATH_FILE);
+			
+			if(f.exists()) {
+				
+				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+				customersList = (List)ois.readObject();
+				ois.close();
+			}
+		}else if(path.equals(EMPLOYEERS_SAVE_PATH_FILE)) {
+			
+			f = new File(EMPLOYEERS_SAVE_PATH_FILE);
+			
+			if(f.exists()) {
+				
+				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+				employersList = (List)ois.readObject();
+				ois.close();
+			}
+		}else if(path.equals(USERS_SAVE_PATH_FILE)) {
+			
+			f = new File(USERS_SAVE_PATH_FILE);
+			
+			if(f.exists()) {
+				
+				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+				userList = (List)ois.readObject();
+				ois.close();
+			}
+		}else if(path.equals(DELIVERS_SAVE_PATH_FILE)) {
+		
+		f = new File(DELIVERS_SAVE_PATH_FILE);	
+			
+			if(f.exists()) {
+				
+				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+				deliveriesList = (List)ois.readObject();
+				ois.close();
+			}
+		}else if(path.equals(INGREDIENTS_SAVE_PATH_FILE)) {
+			
+			f = new File(INGREDIENTS_SAVE_PATH_FILE);
+				
+			if(f.exists()) {
+				
+				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+				ingredientsList = (List)ois.readObject();
+				ois.close();
+			}	
+			
+		}else if(path.equals(PRODUCTS_SAVE_PATH_FILE)) {
+			
+			f = new File(PRODUCTS_SAVE_PATH_FILE);
+				
+				if(f.exists()) {
+					
+					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+					productList = (List)ois.readObject();
+					ois.close();
+				}	
+				
+		}	
+	}
+	
+	public void loadIngredientsData() throws IOException, ClassNotFoundException{
+	    File f = new File(INGREDIENTS_SAVE_PATH_FILE);
+	    if(f.exists()){
+	      ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+	      ingredientsList = (List<Ingredient>)ois.readObject();
+	      ois.close();
+	    }
+	  }
+	public void exportCustomerData(String fileName) throws FileNotFoundException{
+	    PrintWriter pw = new PrintWriter(fileName);
 
-	public void loadEmployeeData() throws IOException, ClassNotFoundException{
-	    File f = new File(EMPLOYEERS_SAVE_PATH_FILE);
-	    if(f.exists()){
-	      ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-	      employersList = (List<Employee>)ois.readObject();
-	      ois.close();
+	    for(int i=0;i<customersList.size();i++){
+	      Customer myCustomer = customersList.get(i);
+	      pw.println(myCustomer.getNames()+";"+myCustomer.getLastNames()+";"+myCustomer.getIdentificatorNumber()+";"+myCustomer.getAddres()+";"+myCustomer.getPhoneNumber()+";"+myCustomer.getComment());
 	    }
+
+	    pw.close();
 	  }
-	public void loadUserData() throws IOException, ClassNotFoundException{
-	    File f = new File(USERS_SAVE_PATH_FILE);
-	    if(f.exists()){
-	      ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-	      userList = (List<User>)ois.readObject();
-	      ois.close();
+	public void exportEmployeeData(String fileName) throws FileNotFoundException{
+	    PrintWriter pw = new PrintWriter(fileName);
+
+	    for(int i=0;i<employersList.size();i++){
+	      Employee myEmployee = employersList.get(i);
+	      pw.println(myEmployee.getNames()+";"+myEmployee.getLastNames()+";"+myEmployee.getIdentificatorNumber());
 	    }
+
+	    pw.close();
 	  }
-	public void loadDeliveryData() throws IOException, ClassNotFoundException{
-	    File f = new File(DELIVERS_SAVE_PATH_FILE);
-	    if(f.exists()){
-	      ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-	      deliveriesList = (List<Delivery>)ois.readObject();
-	      ois.close();
+	public void exportUserData(String fileName) throws FileNotFoundException{
+	    PrintWriter pw = new PrintWriter(fileName);
+
+	    for(int i=0;i<userList.size();i++){
+	      User myUser = userList.get(i);
+	      pw.println(myUser.getNames()+";"+myUser.getLastNames()+";"+myUser.getIdentificatorNumber()+";"+myUser.getUserName()+";"+myUser.getPassword());
 	    }
+
+	    pw.close();
 	  }
-	public void loadCustomersData() throws IOException, ClassNotFoundException{
-	    File f = new File(CUSTOMERS_SAVE_PATH_FILE);
-	    if(f.exists()){
-	      ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-	      customersList = (List<Customer>)ois.readObject();
-	      ois.close();
+	public void exportIngredientData(String fileName) throws FileNotFoundException{
+	    PrintWriter pw = new PrintWriter(fileName);
+
+	    for(int i=0;i<ingredientsList.size();i++){
+	      Ingredient myIngredient = ingredientsList.get(i);
+	      pw.println(myIngredient.getIngredintName()+";"+myIngredient.getCreator()+";"+myIngredient.getLastModifie());
 	    }
+
+	    pw.close();
 	  }
+	public boolean findCustomer(String id, String phone) {
+		
+		boolean found = false;
+		
+		for(int i=0; i < customersList.size() && (found==false);i++) {
+		
+			if(((customersList.get(i).getIdentificatorNumber().equals(id))&&(customersList.get(i).getPhoneNumber().equals(phone)))){
+			
+				found = true;
+				
+				}
+			}
+		return found;
+	}
+	public boolean foundIngredient(String name) {
+		
+		boolean found = false;
+		
+		for(int i=0; i < ingredientsList.size();i++) {
+		
+			if(ingredientsList.get(i).getIngredintName().equals(name)) {
+			
+			}	
+		}
+		return found;
+	}
 	
 }

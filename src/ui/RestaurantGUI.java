@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javafx.collections.FXCollections;
@@ -57,6 +58,9 @@ public class RestaurantGUI {
     @FXML
     private TableColumn<Employee, String> employeeIDTable;
     
+    @FXML
+    private BorderPane customerCreationPane;
+    
 	private Restaurant restaurant;
 	
 	@FXML
@@ -88,7 +92,27 @@ public class RestaurantGUI {
 
     @FXML
     private TableColumn<Ingredient, String> ingredientLastModifiedTable;
+    
+    @FXML
+    private TextField nameClientTxT;
 
+    @FXML
+    private TextField lastNameClientTxT;
+
+    @FXML
+    private TextField idClientTxT;
+
+    @FXML
+    private TextField addressClientTxT;
+
+    @FXML
+    private TextField phoneClientTxT;
+
+    @FXML
+    private TextField commentClientTxT;
+
+    @FXML
+    private TextField ingredientNameTxT;
 
     @FXML
     private PasswordField passwordLoginTxT;
@@ -136,7 +160,7 @@ public class RestaurantGUI {
 	    }
 	 
 	 @FXML
-	 public void createUser(ActionEvent event) {
+	 public void createUser(ActionEvent event) throws FileNotFoundException, IOException {
 		 
 		 String name = userCreationNameTxT.getText();
 		 
@@ -278,6 +302,71 @@ public class RestaurantGUI {
 		 initializeEmployeeList();
 		 
 	    }
-	 
-	 	
+	 @FXML
+	 public void addCustomer(ActionEvent event) throws FileNotFoundException, IOException {
+
+		 String name = nameClientTxT.getText().trim();
+		 
+		 String lastName = lastNameClientTxT.getText().trim();
+		 
+		 String id = idClientTxT.getText().trim();
+		 
+		 String addres = addressClientTxT.getText().trim();
+		 
+		 String phone = phoneClientTxT.getText().trim();
+		 
+		 String comments = commentClientTxT.getText().trim();
+		 
+		 boolean found = restaurant.findCustomer(id, phone);
+		 
+		 if( (name.equals(""))||(lastName.equals("")) || (id.equals("")) ||	(addres.equals(""))||(phone.equals(""))) {
+			 
+			 Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("Debe de llenar todos los campos obligatorios");
+				alert.showAndWait();
+			  
+		 }else {
+			 
+			 if(found==true) {
+				 
+				 Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Information Dialog");
+					alert.setHeaderText(null);
+					alert.setContentText("Ya existe un cliente con el mismo id y telefono");
+					alert.showAndWait();
+				 
+				 
+			 }else {
+				 
+				 restaurant.addCustomer(name, lastName, id, addres, phone, comments);
+				 Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Information Dialog");
+					alert.setHeaderText(null);
+					alert.setContentText("Cliente añadido exitosamente");
+					alert.showAndWait();
+			 }
+			 
+		 }
+	 }
+	  @FXML
+	 public void returnToMainPane(ActionEvent event) throws IOException {
+
+		  FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+			Parent mainMenu = fxmlloader.load();
+			fxmlloader.setController(this);
+			customerCreationPane.getChildren().clear();
+			customerCreationPane.setCenter(mainMenu);	
+		  
+	    }
+	  @FXML
+	  public void addIngredient(ActionEvent event) {
+
+		 String name = ingredientNameTxT.getText().trim(); 
+		  
+		 boolean found = false;
+		 
+	    }
+
 }

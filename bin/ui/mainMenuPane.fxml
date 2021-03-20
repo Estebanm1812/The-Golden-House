@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar style="-fx-background-color: gold;" BorderPane.alignment="CENTER">
@@ -41,14 +40,14 @@
                   <Button layoutX="20.0" layoutY="113.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Añadir Clientes" />
                   <Button layoutX="20.0" layoutY="205.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Añadir Empleados" />
                   <Button layoutX="20.0" layoutY="156.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Ver Lista De Clientes" />
-                  <Button layoutX="21.0" layoutY="253.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Ver Lista De Empleados" />
+                  <Button layoutX="21.0" layoutY="253.0" mnemonicParsing="false" onAction="#loadEmployeeList" prefHeight="31.0" prefWidth="155.0" text="Ver Lista De Empleados" />
                   <Button layoutX="21.0" layoutY="305.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Ver Lista de Usuarios" />
                </children>
             </AnchorPane>
           <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="373.0" prefWidth="231.0">
                <children>
                   <Label layoutX="26.0" layoutY="43.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="156.0" style="-fx-background-color: gold;" text="Administracion de Productos" />
-                  <Button layoutX="27.0" layoutY="121.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Gestion de Ingredientes" />
+                  <Button layoutX="27.0" layoutY="121.0" mnemonicParsing="false" onAction="#loadIngredientsList" prefHeight="31.0" prefWidth="155.0" text="Gestion de Ingredientes" />
                   <Button layoutX="34.0" layoutY="205.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="140.0" text="Gestion De Productos" />
                   <Button layoutX="27.0" layoutY="292.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Gestion de Tipos" />
                </children>

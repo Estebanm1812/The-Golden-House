@@ -1,6 +1,11 @@
 package model;
 
-public class Ingredient {
+import java.io.Serializable;
+
+public class Ingredient implements Serializable{
+
+
+	private static final long serialVersionUID = 3L;
 
 	private String ingredientName;
 	
