@@ -1,2 +1,0 @@
-name;lastName;id
-Carlos;Peralta;1003

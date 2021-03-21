@@ -57,13 +57,12 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pane.fxml"));
-		FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+		FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("LoginPane.fxml"));
 		
 		fxmlLoader.setController(restaurantGUI);
 		
 		fxmlLoader2.setController(restaurantGUI);
 		
-	    Parent loginPane = fxmlLoader.load();
 		
 		Parent root2 = fxmlLoader2.load();
 		

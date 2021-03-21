@@ -10,9 +10,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Restaurant {
 	
@@ -104,28 +104,13 @@ public class Restaurant {
 		saveData(EMPLOYEERS_SAVE_PATH_FILE);
 		
 	}
-	public boolean addUser(String name, String lastName, String identificatorNumber, String userName, String password) throws FileNotFoundException, IOException {
+	public void addUser(String name, String lastName, String identificatorNumber, String userName, String password) throws FileNotFoundException, IOException {
 		
 		User user1 = new User(name, lastName, identificatorNumber, userName, password);
-		
-		boolean found = false;
-		
-		for(int i=0; i < userList.size() && (found==false);i++) {
-		
-			if((userList.get(i).getNames().equals(name))&&(userList.get(i).getLastNames().equals(lastName))&&(userList.get(i).getIdentificatorNumber().equals(identificatorNumber))) {
-			
-				found = true;
-				
-			}
-			
-			
-		}
-		if(found==true) {
-		
+	
 		userList.add(user1);
 		saveData(USERS_SAVE_PATH_FILE);
-		}
-		return found;
+		
 		
 	}
 	public void addIngredient(String name, String creator) throws FileNotFoundException, IOException {
@@ -291,9 +276,9 @@ public class Restaurant {
 			
 			if(f.exists()) {
 				
-			/*	ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-				employersList = (List)ois.readObject();
-				ois.close(); */
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+				employersList = (List<Employee>)ois.readObject();
+				ois.close(); 
 			}
 			
 		}else if(path.equals(USERS_SAVE_PATH_FILE)) {
@@ -410,6 +395,34 @@ public class Restaurant {
 		}
 		return found;
 	}
-	
-	
+	public boolean findEmployee(String id) {
+		
+		boolean found = false;
+		
+		for(int i=0; i < employersList.size() && found==true;i++) {
+		
+			if(employersList.get(i).getIdentificatorNumber().equals(id)) {
+			
+				found = true;
+				
+				}
+			}	
+		return found;
+		
+	}
+	public boolean findEmployee(String name, String lastname, String id) {
+		
+		boolean found = false;
+		
+		
+		for(int i=0; i < employersList.size() && found==false;i++) {	
+		
+		if( (employersList.get(i).getNames().equals(name))&&(employersList.get(i).getLastNames().equals(lastname))&&(employersList.get(i).getIdentificatorNumber().equals(id))) {
+					
+			System.out.println(employersList.get(i).getNames());
+			found = true;	
+			}
+		}	
+		return found;
+	}
 }

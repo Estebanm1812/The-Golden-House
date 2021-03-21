@@ -31,6 +31,9 @@ public class RestaurantGUI {
     private BorderPane loginPane;
 		
     @FXML
+    private BorderPane employeeCreationPane;
+    
+    @FXML
     private BorderPane firstPane;
     
     @FXML
@@ -121,8 +124,17 @@ public class RestaurantGUI {
 
     @FXML
     private PasswordField passwordLoginTxT;
+    
+    @FXML
+    private TextField nameEmployeeCreationTxT;
 
-	
+    @FXML
+    private TextField lastnameEmployeeCreationTxT;
+
+    @FXML
+    private TextField idEmployeeCreationTxT;
+
+   
 	public RestaurantGUI(Restaurant restaurant) {
 	
 		this.restaurant = restaurant;
@@ -185,7 +197,7 @@ public class RestaurantGUI {
 				alert.setContentText("Debe de llenar todos los datos");
 				alert.showAndWait();
 	    }else {
-	    	boolean result = restaurant.addUser(name, lastName, id, userName, password);
+	    	boolean result = restaurant.findEmployee(name, lastName, id);
 			 
 			 if(result==false) {
 			 
@@ -197,6 +209,13 @@ public class RestaurantGUI {
 		    		
 				 
 				 
+			 	}else {
+			 		restaurant.addUser(name, lastName, id, userName, password);
+			 		Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Information Dialog");
+					alert.setHeaderText(null);
+					alert.setContentText("El Usuario fue creado exitosamente");
+					alert.showAndWait();	
 			 	}
 	    }
 	 } 
@@ -225,10 +244,10 @@ public class RestaurantGUI {
 		 			if(enters==true) {
 		 		
 		 			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
-		 			Parent mainMenu = fxmlloader.load();
 		 			fxmlloader.setController(this);
-		 			pane.getChildren().clear();
-		 			pane.setCenter(mainMenu);
+		 			Parent mainMenu = fxmlloader.load();
+		 			loginPane.getChildren().clear();
+		 			loginPane.setCenter(mainMenu);
 		 			restaurant.setCurrentUser(userName);
 		 			}else {
 		 				
@@ -421,5 +440,63 @@ public class RestaurantGUI {
 			Parent mainMenu = fxmlloader.load();
 			CreateIngredientPane.getChildren().clear();
 			CreateIngredientPane.setCenter(mainMenu);	
+	    }
+	  @FXML
+	  public void loadEmployeeCreationPane(ActionEvent event) throws IOException {
+
+		  FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("employeeCreationPane.fxml"));
+		  fxmlloader.setController(this);
+			Parent mainMenu = fxmlloader.load();
+			mainMenuPane.getChildren().clear();
+			mainMenuPane.setCenter(mainMenu);
+		  
+		  
+	    }
+	  @FXML
+	  public void createEmployee(ActionEvent event) throws FileNotFoundException, IOException {
+
+		  String names = nameEmployeeCreationTxT.getText().trim();
+		  
+		  String lastNames = lastnameEmployeeCreationTxT.getText().trim();
+		  
+		  String id = idEmployeeCreationTxT.getText().trim();
+		  
+		  boolean found = restaurant.findEmployee(id);
+		  
+		  if(found==false) {
+		  
+			  restaurant.addEmployee(names, lastNames, id);
+			  Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("Empleado añadido exitosamente");
+				alert.showAndWait();
+		  }else {
+			  Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("El empleado ya existe");
+				alert.showAndWait();
+		  }
+	    }
+	  @FXML
+	  public void returnFromEmployeeCreation(ActionEvent event) throws IOException {
+
+		  FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+		  fxmlloader.setController(this);
+			Parent employeeCreation = fxmlloader.load();
+			employeeCreationPane.getChildren().clear();
+			employeeCreationPane.setCenter(employeeCreation);	
+		  
+	    }
+	  @FXML
+	  public void createUserAccountFromMenu(ActionEvent event) throws IOException {
+
+		  FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("userCreationPane.fxml"));
+		  fxmlloader.setController(this);
+			Parent mainMenu = fxmlloader.load();
+			mainMenuPane.getChildren().clear();
+			mainMenuPane.setCenter(mainMenu);
+		  
 	    }
 }
