@@ -12,7 +12,6 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Restaurant {
 	
@@ -85,6 +84,7 @@ public class Restaurant {
 		currentUser = name;
 	}
 	
+	
 	public void addCustomer(String name, String lastName, String id, String addres, String phone, String comment) throws FileNotFoundException, IOException {
 		
 		Customer customer1 = new Customer(name, lastName, id, addres, phone,comment);
@@ -152,6 +152,16 @@ public class Restaurant {
 	public void setProductList(List<Product> list) {
 		productList = list;
 	}
+	public List<Customer> getCustomerList(){
+		return customersList;
+	}
+	public void setCustomerList(List<Customer> list) {
+		customersList = list;
+	}
+	public List<User> getUserList(){
+		return userList;
+	}
+	
 	public void setEmployeeList(ArrayList<Employee> employersList) {
 		this.employersList = employersList;
 	}

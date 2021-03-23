@@ -32,7 +32,7 @@
                </font>
             </Label>
             <TextField fx:id="userLoginTxT" GridPane.columnIndex="1" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#LogIn" prefHeight="32.0" prefWidth="114.0" style="-fx-background-color: gold;" text="Log in" textAlignment="CENTER" translateX="40.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#LogIn" prefHeight="32.0" prefWidth="131.0" style="-fx-background-color: gold;" text="Iniciar sesion" textAlignment="CENTER" translateX="-50.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font name="Times New Roman Italic" size="17.0" />
                </font>
@@ -44,6 +44,11 @@
                </font>
             </Label>
             <PasswordField fx:id="passwordLoginTxT" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button alignment="CENTER" layoutX="210.0" layoutY="194.0" mnemonicParsing="false" onAction="#returnToFirstPane" prefHeight="32.0" prefWidth="114.0" style="-fx-background-color: gold;" text="Volver" textAlignment="CENTER" translateX="-60.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Times New Roman Italic" size="17.0" />
+               </font>
+            </Button>
          </children>
       </GridPane>
    </center>

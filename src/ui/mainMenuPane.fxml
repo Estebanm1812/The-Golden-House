@@ -37,11 +37,11 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Label layoutX="20.0" layoutY="48.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="156.0" style="-fx-background-color: gold;" text="Administracion de Personas" />
-                  <Button layoutX="20.0" layoutY="104.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Añadir Clientes" />
+                  <Button layoutX="20.0" layoutY="104.0" mnemonicParsing="false" onAction="#openCustomerCreationPane" prefHeight="31.0" prefWidth="155.0" text="Añadir Clientes" />
                   <Button layoutX="20.0" layoutY="195.0" mnemonicParsing="false" onAction="#loadEmployeeCreationPane" prefHeight="31.0" prefWidth="155.0" text="Añadir Empleados" />
-                  <Button layoutX="20.0" layoutY="149.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Ver Lista De Clientes" />
+                  <Button layoutX="20.0" layoutY="149.0" mnemonicParsing="false" onAction="#openCustomerList" prefHeight="31.0" prefWidth="155.0" text="Ver Lista De Clientes" />
                   <Button layoutX="21.0" layoutY="242.0" mnemonicParsing="false" onAction="#loadEmployeeList" prefHeight="31.0" prefWidth="155.0" text="Ver Lista De Empleados" />
-                  <Button layoutX="20.0" layoutY="328.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Ver Lista de Usuarios" />
+                  <Button layoutX="20.0" layoutY="328.0" mnemonicParsing="false" onAction="#openUsersList" prefHeight="31.0" prefWidth="155.0" text="Ver Lista de Usuarios" />
                   <Button layoutX="21.0" layoutY="281.0" mnemonicParsing="false" onAction="#createUserAccountFromMenu" prefHeight="31.0" prefWidth="155.0" text="Añadir Usuarios" />
                </children>
             </AnchorPane>

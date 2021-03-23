@@ -17,18 +17,26 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import model.Customer;
 import model.Employee;
 import model.Ingredient;
 import model.Restaurant;
+import model.User;
 
 
 public class RestaurantGUI {
 	
 	 @FXML
 	private BorderPane mainMenuPane;
-
+	 
+	 @FXML
+	private BorderPane customersPane;
+ 
     @FXML
     private BorderPane loginPane;
+    
+    @FXML
+    private BorderPane userCreationPane;
 		
     @FXML
     private BorderPane employeeCreationPane;
@@ -133,6 +141,42 @@ public class RestaurantGUI {
 
     @FXML
     private TextField idEmployeeCreationTxT;
+    
+    @FXML
+    private TableColumn<Customer, String> customerTableName;
+
+    @FXML
+    private TableColumn<Customer, String> customerTableLastnames;
+
+    @FXML
+    private TableColumn<Customer, String> customerTableID;
+
+    @FXML
+    private TableColumn<Customer, String> customerTableAddres;
+
+    @FXML
+    private TableColumn<Customer, String> customerTablePhone;
+    
+    @FXML
+    private TableView<Customer> customerList;
+    
+    @FXML
+    private BorderPane userListPane;
+
+    @FXML
+    private TableView<User> userTable;
+
+    @FXML
+    private TableColumn<User, String> userNameTable;
+
+    @FXML
+    private TableColumn<User, String> userLastNameTable;
+
+    @FXML
+    private TableColumn<User, String> userIDTable;
+
+    @FXML
+    private TableColumn<User, String> userUsernameTable;
 
    
 	public RestaurantGUI(Restaurant restaurant) {
@@ -275,6 +319,18 @@ public class RestaurantGUI {
 			loginPane.setCenter(root1);
 		 
 	    }
+	 public void initializeCustomerList() {
+		 
+		 ObservableList<Customer> observableList;
+		 observableList = FXCollections.observableArrayList(restaurant.getCustomerList());
+		 customerList.setItems(observableList);
+		 
+		 customerTableName.setCellValueFactory(new PropertyValueFactory<Customer,String>("names"));
+		 customerTableLastnames.setCellValueFactory(new PropertyValueFactory<Customer,String>("lastNames"));
+		 customerTableID.setCellValueFactory(new PropertyValueFactory<Customer,String>("identificatorNumber"));
+		 customerTableAddres.setCellValueFactory(new PropertyValueFactory<Customer,String>("addres"));
+		 customerTablePhone.setCellValueFactory(new PropertyValueFactory<Customer,String>("phoneNumber"));
+	 }
 	 
 	 public void initializeIngredientList(){
 		 
@@ -309,11 +365,23 @@ public class RestaurantGUI {
 		 
 		employeeTable.setItems(observableList);
 		
-		employeeNameTable.setCellValueFactory(new PropertyValueFactory<Employee,String>("name"));
-		employeeLastNameTable.setCellValueFactory(new PropertyValueFactory<Employee,String>("lastName"));
+		employeeNameTable.setCellValueFactory(new PropertyValueFactory<Employee,String>("names"));
+		employeeLastNameTable.setCellValueFactory(new PropertyValueFactory<Employee,String>("lastNames"));
 		employeeIDTable.setCellValueFactory(new PropertyValueFactory<Employee,String>("identificatorNumber"));
 	 
 	 }
+	 public void initializeUserList() {
+		 
+			ObservableList<User> observableList;
+			observableList = FXCollections.observableArrayList(restaurant.getUserList());
+			 
+			userTable.setItems(observableList);
+			
+			userNameTable.setCellValueFactory(new PropertyValueFactory<User,String>("names"));
+			userLastNameTable.setCellValueFactory(new PropertyValueFactory<User,String>("lastNames"));
+			userIDTable.setCellValueFactory(new PropertyValueFactory<User,String>("identificatorNumber"));
+			userUsernameTable.setCellValueFactory(new PropertyValueFactory<User,String>("userName"));
+		 }
 	 @FXML
 	 public void loadEmployeeList(ActionEvent event) throws IOException {
 
@@ -322,8 +390,8 @@ public class RestaurantGUI {
 		 
 		 Parent root1 = fxml1.load();
 		 
-		 employeeListPane.getChildren().clear();
-		 employeeListPane.getChildren().setAll(root1);
+		 mainMenuPane.getChildren().clear();
+		 mainMenuPane.getChildren().setAll(root1);
 		 initializeEmployeeList();
 		 
 	    }
@@ -379,12 +447,23 @@ public class RestaurantGUI {
 	 public void returnToMainPane(ActionEvent event) throws IOException {
 
 		  FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+		  fxmlloader.setController(this);
 			Parent mainMenu = fxmlloader.load();
-			fxmlloader.setController(this);
 			customerCreationPane.getChildren().clear();
 			customerCreationPane.setCenter(mainMenu);	
 		  
 	    }
+	  @FXML
+	  public void returnToMainPane2(ActionEvent event) throws IOException {
+
+			  FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+			  fxmlloader.setController(this);
+				Parent mainMenu = fxmlloader.load();
+				
+				userCreationPane.getChildren().clear();
+				userCreationPane.setCenter(mainMenu);	
+			  
+		    }
 	  @FXML
 	  public void addIngredient(ActionEvent event) {
 
@@ -492,11 +571,88 @@ public class RestaurantGUI {
 	  @FXML
 	  public void createUserAccountFromMenu(ActionEvent event) throws IOException {
 
-		  FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("userCreationPane.fxml"));
+		  FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("userCreationPane2.fxml"));
 		  fxmlloader.setController(this);
 			Parent mainMenu = fxmlloader.load();
 			mainMenuPane.getChildren().clear();
 			mainMenuPane.setCenter(mainMenu);
+		  
+	    }
+	  @FXML
+	   public void returnToLoginPane(ActionEvent event) throws IOException {
+
+		  FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("userLogin.fxml"));
+		  fxmlloader.setController(this);
+			Parent mainMenu = fxmlloader.load();
+			userCreationPane.getChildren().clear();
+			userCreationPane.setCenter(mainMenu);
+		  
+	    }
+	  @FXML
+	    void returnToFirstPane(ActionEvent event) throws IOException {
+
+		  FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("LoginPane.fxml"));
+		  fxmlloader.setController(this);
+			Parent mainMenu = fxmlloader.load();
+			loginPane.getChildren().clear();
+			loginPane.setCenter(mainMenu);
+		  
+		  
+	    }
+	  @FXML
+	  public void returnToMainPageFromEmployee(ActionEvent event) throws IOException {
+
+
+		  FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+		  fxmlloader.setController(this);
+		Parent mainMenu = fxmlloader.load();
+		employeeListPane.getChildren().clear();
+			employeeListPane.setCenter(mainMenu);
+		  
+	    }
+	  @FXML
+	   public void openCustomerCreationPane(ActionEvent event) throws IOException {
+
+		  FXMLLoader fxml = new FXMLLoader(getClass().getResource("customerCreationPane.fxml"));
+		  fxml.setController(this);
+		  Parent customerCreation = fxml.load();
+		  mainMenuPane.getChildren().clear();
+		  mainMenuPane.setCenter(customerCreation);
+		  
+		  
+	    }
+	  @FXML
+	  public void openCustomerList(ActionEvent event) throws IOException {
+
+		  FXMLLoader fxml = new FXMLLoader(getClass().getResource("customerListPane.fxml"));
+		  fxml.setController(this);
+		  Parent customerCreation = fxml.load();
+		  mainMenuPane.getChildren().clear();
+		  mainMenuPane.setCenter(customerCreation);
+		  initializeCustomerList();
+		  
+	    } 
+	  @FXML
+	  public void returnFromCustomerList(ActionEvent event) throws IOException {
+		  
+		  FXMLLoader fxml = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+		  fxml.setController(this);
+		  Parent customerCreation = fxml.load();
+		  customersPane.getChildren().clear();
+		  customersPane.setCenter(customerCreation);
+		  
+	    }
+	  @FXML
+	  public void openUsersList(ActionEvent event) throws IOException {
+
+		  FXMLLoader fxml1 = new FXMLLoader(getClass().getResource("userListPane.fxml"));
+		  fxml1.setController(this);
+			 
+			 Parent root1 = fxml1.load();
+			 
+			 mainMenuPane.getChildren().clear();
+			 mainMenuPane.getChildren().setAll(root1);
+			initializeUserList();
 		  
 	    }
 }

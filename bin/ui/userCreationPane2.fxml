@@ -48,7 +48,7 @@
                </font>
             </Label>
             <Button mnemonicParsing="false" onAction="#createUser" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: gold;" text="Crear" translateX="40.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Button layoutX="210.0" layoutY="369.0" mnemonicParsing="false" onAction="#returnToLoginPane" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: gold;" text="Volver" translateX="120.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Button layoutX="210.0" layoutY="369.0" mnemonicParsing="false" onAction="#returnToMainPane2" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: gold;" text="Volver" translateX="120.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
    </center>
