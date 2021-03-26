@@ -42,6 +42,8 @@ public class Main extends Application{
 		restaurant.loadData(restaurant.getDeliverySavePath());
 		
 		restaurant.loadData(restaurant.getProductSavePath());
+		
+		restaurant.loadData(restaurant.getProductTypeSavePanth());
 		}catch(ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 			Alert alert = new Alert(AlertType.INFORMATION);

@@ -27,6 +27,8 @@ public class Restaurant {
 	
 	public final static String PRODUCTS_SAVE_PATH_FILE = "data/products.decade";
 	
+	public final static String PRODUCT_TYPE_SAVE_PATH_FILE = "data/productType.decade";
+	
 	private List<Customer> customersList;
 	
 	private List<Employee> employersList;
@@ -38,6 +40,8 @@ public class Restaurant {
 	private List<Delivery> deliveriesList;
 	
 	private List<Product> productList;
+	
+	private List<ProductType> productTypeList;
 	
 	private String currentUser;
 	
@@ -55,6 +59,8 @@ public class Restaurant {
 		deliveriesList = new ArrayList<Delivery>();
 		
 		productList = new ArrayList<Product>();
+		
+		productTypeList = new ArrayList<ProductType>();
 		
 		currentUser = "";
 		
@@ -161,6 +167,9 @@ public class Restaurant {
 	public List<User> getUserList(){
 		return userList;
 	}
+	public List<ProductType> getProductTypeList(){
+		return productTypeList;
+	}
 	
 	public void setEmployeeList(ArrayList<Employee> employersList) {
 		this.employersList = employersList;
@@ -205,6 +214,11 @@ public class Restaurant {
 			
 			oos = new ObjectOutputStream(new FileOutputStream(PRODUCTS_SAVE_PATH_FILE));
 			oos.writeObject(productList);
+			oos.close();
+		}else if(path.equals(PRODUCT_TYPE_SAVE_PATH_FILE)) {
+			
+			oos = new ObjectOutputStream(new FileOutputStream(PRODUCT_TYPE_SAVE_PATH_FILE));
+			oos.writeObject(productTypeList);
 			oos.close();
 		}	
 	}
@@ -333,8 +347,19 @@ public class Restaurant {
 					ois.close();
 				}	
 				
-		}	
+		}else if(path.equals(PRODUCT_TYPE_SAVE_PATH_FILE)) {	
+		
+			f = new File(PRODUCT_TYPE_SAVE_PATH_FILE);
+			
+			if(f.exists()) {
+				
+				ObjectInputStream ois = new ObjectInputStream(new FileInputStream(PRODUCT_TYPE_SAVE_PATH_FILE));
+				productTypeList = (List<ProductType>)ois.readObject();
+				ois.close();
+			}	
+		}
 	}
+		
 	
 	public void exportCustomerData(String fileName) throws FileNotFoundException{
 	    PrintWriter pw = new PrintWriter(fileName);
@@ -411,7 +436,7 @@ public class Restaurant {
 		
 		for(int i=0; i < employersList.size() && found==true;i++) {
 		
-			if(employersList.get(i).getIdentificatorNumber().equals(id)) {
+			if((employersList.get(i).getIdentificatorNumber().equals(id))&&(employersList.get(i).getState().equals("ACTIVO"))) {
 			
 				found = true;
 				
@@ -434,5 +459,32 @@ public class Restaurant {
 			}
 		}	
 		return found;
+	}
+	public boolean findProductType(String name) {
+		
+		boolean found = false;
+		
+			if(productTypeList.size()!=0) {
+		
+		for(int i=0; i < productTypeList.size() && (found==false);i++) {
+		
+			if(productTypeList.get(i).getName().equals(name)) {
+		
+				found = true;
+			}
+		}
+			}
+		return found;
+	}
+	public String getProductTypeSavePanth() {
+		return PRODUCT_TYPE_SAVE_PATH_FILE;
+
+	}
+	public void addProductType(String name) throws FileNotFoundException, IOException {
+		
+		ProductType pt1 = new ProductType(name,getCurrentUser());
+		
+		productTypeList.add(pt1);
+		saveData(PRODUCT_TYPE_SAVE_PATH_FILE);
 	}
 }

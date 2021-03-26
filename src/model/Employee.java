@@ -12,7 +12,7 @@ public class Employee extends Person implements Serializable{
 		
 		super(name, lastName, identificatorNumber);
 		
-		state = "ACTIVE";
+		state = "ACTIVO";
 	}
 	public String getState() {
 		return state;

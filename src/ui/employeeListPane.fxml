@@ -10,9 +10,10 @@
    <center>
       <TableView fx:id="employeeTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="employeeNameTable" prefWidth="182.0" text="Nombre" />
-          <TableColumn fx:id="employeeLastNameTable" minWidth="0.0" prefWidth="222.0" text="Apellido" />
-            <TableColumn fx:id="employeeIDTable" prefWidth="195.0" text="Numero de Identificacion" />
+          <TableColumn fx:id="employeeNameTable" prefWidth="140.0" text="Nombre" />
+          <TableColumn fx:id="employeeLastNameTable" minWidth="0.0" prefWidth="164.0" text="Apellido" />
+            <TableColumn fx:id="employeeIDTable" prefWidth="160.0" text="Numero de Identificacion" />
+            <TableColumn fx:id="employeeStateTable" prefWidth="135.0" text="Estado" />
         </columns>
       </TableView>
    </center>

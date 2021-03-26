@@ -8,13 +8,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import model.Customer;
@@ -45,6 +48,12 @@ public class RestaurantGUI {
     private BorderPane firstPane;
     
     @FXML
+    private BorderPane createProductTypePane;
+
+    @FXML
+    private TextField productTypeNameTxT;
+    
+    @FXML
     private BorderPane ingredientListPane;
 	
     @FXML
@@ -73,6 +82,10 @@ public class RestaurantGUI {
 
     @FXML
     private TableColumn<Employee, String> employeeIDTable;
+    
+    @FXML
+    private TableColumn<Employee, String> employeeStateTable;
+
     
     @FXML
     private BorderPane customerCreationPane;
@@ -364,11 +377,50 @@ public class RestaurantGUI {
 		observableList = FXCollections.observableArrayList(restaurant.getEmployeeList());
 		 
 		employeeTable.setItems(observableList);
+		employeeTable.setEditable(true);
 		
 		employeeNameTable.setCellValueFactory(new PropertyValueFactory<Employee,String>("names"));
 		employeeLastNameTable.setCellValueFactory(new PropertyValueFactory<Employee,String>("lastNames"));
 		employeeIDTable.setCellValueFactory(new PropertyValueFactory<Employee,String>("identificatorNumber"));
-	 
+		employeeStateTable.setCellValueFactory(new PropertyValueFactory<Employee,String>("state"));
+		
+		/*
+		employeeTable.setRowFactory(tv -> {
+			
+			TableRow<Employee> row = new TableRow<>();
+			row.setOnMouseClicked(event ->{
+			
+			if(event.getClickCount() == 2 && (!row.isEmpty())) {
+				
+				Employee rowData = row.getItem();
+				rowData.setState("INACTIVO");
+				
+				}
+			});
+		});
+		/*employeeIDTable.setCellFactory(tc -> {
+            TableCell<Employee, String> cell = new TableCell<Employee, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty) ;
+                    setText(empty ? null : item);
+                }
+            };
+            cell.setOnMouseClicked(e -> {
+                if (! cell.isEmpty()) {
+                    String userState = "INACTIVO"; 
+                    String actualState = cell.getItem();
+                    cell.setItem(userState);
+                    
+                   
+                }
+            });
+            return cell ;
+        });*/
+		
+
+							
+			
 	 }
 	 public void initializeUserList() {
 		 
@@ -655,4 +707,51 @@ public class RestaurantGUI {
 			initializeUserList();
 		  
 	    }
+	  @FXML
+	   public void addProductType(ActionEvent event) throws FileNotFoundException, IOException {
+
+		  String name = productTypeNameTxT.getText().trim();
+		  boolean found = restaurant.findProductType(name);
+		  
+		  if(found == true) {
+			  Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("Ya existe ese tipo de Producto");
+				alert.showAndWait();
+		  }else {
+			  restaurant.addProductType(name);
+			  Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("Se ha añadido el tipo de Producto");
+				alert.showAndWait();
+		  }
+		  
+	    }
+	  @FXML
+	 public void changeToProductTypePane(ActionEvent event) throws IOException {
+
+		  FXMLLoader fxml = new FXMLLoader(getClass().getResource("addProductTypePane.fxml"));
+		  fxml.setController(this);
+		  
+		  Parent root1 = fxml.load();
+		  
+		  mainMenuPane.getChildren().clear();
+		  mainMenuPane.setCenter(root1);
+	    }
+	  @FXML
+	  public void returnFromAddProductType(ActionEvent event) throws IOException {
+
+		  FXMLLoader fxml = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+		  fxml.setController(this);
+		  
+		  Parent root1 = fxml.load();
+		  
+		  createProductTypePane.getChildren().clear();
+		  createProductTypePane.setCenter(root1);
+		  
+		  
+	    }
+	  
 }

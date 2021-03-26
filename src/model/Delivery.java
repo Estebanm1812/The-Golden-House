@@ -11,7 +11,7 @@ public class Delivery implements Serializable{
 	
 	private String state;
 	
-	private Product [] productList;
+	private String [] productList;
 	
 	private Customer customer;
 	
@@ -19,7 +19,7 @@ public class Delivery implements Serializable{
 	
 	private Date date;
 	
-	public Delivery(String code, String state, Product[] productList, Customer customer,Employee employee, Date date) {
+	public Delivery(String code, String state, String[] productList, Customer customer,Employee employee, Date date) {
 		
 		this.code = code;
 		this.state = state;
@@ -45,11 +45,11 @@ public class Delivery implements Serializable{
 		this.state = state;
 	}
 
-	public Product [] getProductList() {
+	public String [] getProductList() {
 		return productList;
 	}
 
-	public void setProductList(Product [] productList) {
+	public void setProductList(String [] productList) {
 		this.productList = productList;
 	}
 

@@ -12,13 +12,17 @@ public class Product implements Serializable{
 	
 	private String [] sizes;
 	
-	public Product(String name, double [] prices, String [] sizes) {
+	private String [] ingredients;
+	
+	public Product(String name, double [] prices, String [] sizes, String [] ingredients) {
 	
 		this.name = name;
 		
 		this.prices = prices;
 		
 		this.sizes = sizes;
+		
+		this.ingredients = ingredients;
 	}
 	public String getName() {
 		return name;
@@ -39,5 +43,11 @@ public class Product implements Serializable{
 	}
 	public void setSize(String [] sizes) {
 		this.sizes = sizes;
+	}
+	public String [] getIngredients() {
+		return ingredients;
+	}
+	public void setIngredients(String [] ingredients) {
+		this.ingredients = ingredients;
 	}
 }
