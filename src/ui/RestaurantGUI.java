@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -190,7 +191,66 @@ public class RestaurantGUI {
 
     @FXML
     private TableColumn<User, String> userUsernameTable;
+    
+    @FXML
+    private BorderPane productPane;
 
+    @FXML
+    private TextField productNameTxT;
+
+    @FXML
+    private TextField productPriceTxT;
+
+    @FXML
+    private ComboBox<String> productIngredientComboBox;
+    
+    @FXML
+    private ComboBox<String> productIngredientComboBox2;
+
+    @FXML
+    private ComboBox<String> productIngredientComboBox3;
+
+    @FXML
+    private ComboBox<String> productIngredientComboBox4;
+
+    @FXML
+    private ComboBox<String> productIngredientComboBox5;
+
+    @FXML
+    private ComboBox<String> productIngredientComboBox6;
+
+    @FXML
+    private ComboBox<String> productIngredientComboBox7;
+
+    @FXML
+    private ComboBox<String> productIngredientComboBox8;
+
+    @FXML
+    private ComboBox<String> productIngredientComboBox9;
+
+    @FXML
+    private ComboBox<String> productIngredientComboBox10;
+
+    @FXML
+    private ComboBox<String> productIngredientComboBox11;
+
+    @FXML
+    private ComboBox<String> productIngredientComboBox12;
+
+    @FXML
+    private ComboBox<String> productIngredientComboBox13;
+
+    @FXML
+    private ComboBox<String> productIngredientComboBox14;
+
+    @FXML
+    private ComboBox<String> productIngredientComboBox15;
+    
+    @FXML
+    private ComboBox<String> productProductTypeComboBox;
+    
+    @FXML
+    private TextField productSizeTxT;
    
 	public RestaurantGUI(Restaurant restaurant) {
 	
@@ -753,5 +813,98 @@ public class RestaurantGUI {
 		  
 		  
 	    }
+	  @SuppressWarnings("unchecked")
+	@FXML
+	  public  void openProductCreationPane(ActionEvent event) throws IOException {
+
+		  FXMLLoader fxml = new FXMLLoader(getClass().getResource("productCreationPane.fxml"));
+		  fxml.setController(this);
+		  
+		  Parent root1 = fxml.load();
+		  
+		  mainMenuPane.getChildren().clear();
+		  mainMenuPane.setCenter(root1);
+		  
+	  
+		  for(int i=0; i < restaurant.getIngredientsList().size();i++) {
+		  String ingredient = restaurant.getIngredientsList().get(i).getIngredintName();
+		  productIngredientComboBox.getItems().add(ingredient);
+		  productIngredientComboBox2.getItems().add(ingredient);
+		  productIngredientComboBox3.getItems().add(ingredient);
+		  productIngredientComboBox4.getItems().add(ingredient);
+		  productIngredientComboBox5.getItems().add(ingredient);
+		  productIngredientComboBox6.getItems().add(ingredient);
+		  productIngredientComboBox7.getItems().add(ingredient);
+		  productIngredientComboBox8.getItems().add(ingredient);
+		  productIngredientComboBox9.getItems().add(ingredient);
+		  productIngredientComboBox10.getItems().add(ingredient);
+		  productIngredientComboBox11.getItems().add(ingredient);
+		  productIngredientComboBox12.getItems().add(ingredient);
+		  productIngredientComboBox13.getItems().add(ingredient);
+		  productIngredientComboBox14.getItems().add(ingredient);
+		  productIngredientComboBox15.getItems().add(ingredient);
+		  }
+		  
+		  for(int i=0; i< restaurant.getProductTypeList().size();i++) {
+		  String type = restaurant.getProductTypeList().get(i).getName();  
+		  productProductTypeComboBox.getItems().add(type);
+			  
+		  }
+	}
+	  @FXML
+	  public  void returnFromProductCreation(ActionEvent event) throws IOException {
+
+		  
+		  FXMLLoader fxml = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+		  fxml.setController(this);
+		  
+		  Parent root1 = fxml.load();
+		  
+		  productPane.getChildren().clear();
+		  productPane.setCenter(root1);
+		  
+	    }
+	  @FXML
+	  public void addProduct(ActionEvent event) throws FileNotFoundException, IOException {
+
+		  String name = productNameTxT.getText().trim();
+		  
+		  double price = Double.parseDouble(productPriceTxT.getText());
+		  
+		  String [] ingredients = new String[15];
+		  
+		  String size = productSizeTxT.getText().trim();
+		  
+		  boolean found = restaurant.findProduct(name, ingredients,price);
+		  
+		  if((productNameTxT.getText().equals(""))||(productPriceTxT.getText().equals(""))||(size.equals(""))){
+		  
+			  
+			  
+			  
+			  
+		  if(found==true) {
+		  
+			  Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("Ya existe ese Producto con el mismo precio");
+				alert.showAndWait();
+			  
+		  }else {
+			  
+			  restaurant.addProduct(name, ingredients, size, price);
+			  
+			  Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("Se ha añadido el Producto");
+				alert.showAndWait();
+			  
+			  
+		  }
+		  
+	    }
+	  }
 	  
 }

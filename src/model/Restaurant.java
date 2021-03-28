@@ -487,4 +487,27 @@ public class Restaurant {
 		productTypeList.add(pt1);
 		saveData(PRODUCT_TYPE_SAVE_PATH_FILE);
 	}
+	public boolean findProduct(String name,String [] ingredients, double price) {
+		
+		boolean found = false;
+		
+			if(productList.size()!=0) {
+		
+		for(int i=0; i < productList.size() && found==false;i++) {
+		
+			if((productList.get(i).getIngredients().equals(ingredients))  && (productList.get(i).getPrices()==price)) {
+			
+				found = true;
+			
+			}
+		}
+			}
+		return found;
+	}
+	public void addProduct(String name, String [] ingredients,String size, double price) throws FileNotFoundException, IOException {
+		
+		Product product1 = new Product(name,price,size,ingredients);
+		productList.add(product1);
+		saveData(PRODUCTS_SAVE_PATH_FILE);
+	}
 }

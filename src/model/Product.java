@@ -8,13 +8,13 @@ public class Product implements Serializable{
 
 	private String name;
 	
-	private double [] prices;
+	private double prices;
 	
-	private String [] sizes;
+	private String sizes;
 	
 	private String [] ingredients;
 	
-	public Product(String name, double [] prices, String [] sizes, String [] ingredients) {
+	public Product(String name, double prices, String sizes, String [] ingredients) {
 	
 		this.name = name;
 		
@@ -30,18 +30,18 @@ public class Product implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public double [] getPrices() {
+	public double getPrices() {
 		return prices;
 	}
-	public void setPrice(double [] prices) {
+	public void setPrice(double  prices) {
 		
 		this.prices = prices;
 		
 	}
-	public String [] getSize() {
+	public String  getSize() {
 		return sizes;
 	}
-	public void setSize(String [] sizes) {
+	public void setSize(String sizes) {
 		this.sizes = sizes;
 	}
 	public String [] getIngredients() {

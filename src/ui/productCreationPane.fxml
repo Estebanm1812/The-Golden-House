@@ -3,41 +3,147 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <GridPane BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="80.0" style="-fx-background-color: gold;" text="Nombre:" translateX="120.0" />
-            <TextField translateX="5.0" GridPane.columnIndex="1" />
-            <TextField layoutX="210.0" layoutY="98.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label layoutX="10.0" layoutY="102.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="80.0" style="-fx-background-color: gold;" text="Precio:" translateX="120.0" GridPane.rowIndex="1" />
-            <ComboBox prefHeight="25.0" prefWidth="218.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label layoutX="10.0" layoutY="169.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="80.0" style="-fx-background-color: gold;" text="Ingredientes:" translateX="120.0" GridPane.rowIndex="2" />
-            <Label layoutX="10.0" layoutY="236.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="80.0" style="-fx-background-color: gold;" text="Tamaño:" translateX="120.0" GridPane.rowIndex="3" />
-            <TextField layoutX="210.0" layoutY="165.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" style="-fx-background-color: gold;" text="Crear Producto" translateX="70.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" style="-fx-background-color: gold;" text="Añadir otro Ingrediente" translateX="40.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" style="-fx-background-color: gold;" text="Volver al menu" translateX="100.0" GridPane.rowIndex="4" />
-         </children>
-      </GridPane>
-   </center>
-</BorderPane>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane fx:id="productPane" prefHeight="200.0" prefWidth="200.0">
+         <center>
+            <TabPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+              <tabs>
+                <Tab text="Producto">
+                     <content>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                           <center>
+                              <GridPane BorderPane.alignment="CENTER">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="78.0" style="-fx-background-color: gold;" text="Nombre:" translateX="120.0" />
+                                    <Label layoutX="10.0" layoutY="64.0" prefHeight="17.0" prefWidth="78.0" style="-fx-background-color: gold;" text="Precio:" translateX="120.0" GridPane.rowIndex="1" />
+                                    <Label layoutX="10.0" layoutY="188.0" prefHeight="17.0" prefWidth="78.0" style="-fx-background-color: gold;" text="Ingredientes:" translateX="120.0" GridPane.rowIndex="2" />
+                                    <TextField fx:id="productNameTxT" translateX="5.0" GridPane.columnIndex="1" />
+                                    <TextField fx:id="productPriceTxT" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <ComboBox fx:id="productIngredientComboBox" prefHeight="25.0" prefWidth="231.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label layoutX="10.0" layoutY="188.0" prefHeight="17.0" prefWidth="78.0" style="-fx-background-color: gold;" text="Tamaño:" translateX="120.0" GridPane.rowIndex="3" />
+                                    <TextField fx:id="productSizeTxT" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Button mnemonicParsing="false" onAction="#returnFromProductCreation" style="-fx-background-color: gold;" text="Volver" translateX="220.0" GridPane.rowIndex="5" />
+                                    <Button mnemonicParsing="false" onAction="#addProduct" style="-fx-background-color: gold;" text="Crear" translateX="140.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label layoutX="10.0" layoutY="219.0" prefHeight="17.0" prefWidth="78.0" style="-fx-background-color: gold;" text="Tipo:" translateX="120.0" GridPane.rowIndex="4" />
+                                    <ComboBox fx:id="productProductTypeComboBox" prefHeight="25.0" prefWidth="211.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                 </children>
+                              </GridPane>
+                           </center>
+                        </BorderPane>
+                     </content>
+                </Tab>
+                <Tab text="Lista 1 de Ingredientes">
+                     <content>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                           <center>
+                              <GridPane BorderPane.alignment="CENTER">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="141.0" style="-fx-background-color: gold;" text="Ingrediente 2: (Opcional)" translateX="60.0" />
+                                    <Label layoutX="10.0" layoutY="19.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="141.0" style="-fx-background-color: gold;" text="Ingrediente 4: (Opcional)" translateX="60.0" GridPane.rowIndex="2" />
+                                    <Label layoutX="10.0" layoutY="87.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="141.0" style="-fx-background-color: gold;" text="Ingrediente 3: (Opcional)" translateX="60.0" GridPane.rowIndex="1" />
+                                    <Label layoutX="10.0" layoutY="53.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="141.0" style="-fx-background-color: gold;" text="Ingrediente 6: (Opcional)" translateX="60.0" GridPane.rowIndex="4" />
+                                    <Label layoutX="10.0" layoutY="141.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="141.0" style="-fx-background-color: gold;" text="Ingrediente 5: (Opcional)" translateX="60.0" GridPane.rowIndex="3" />
+                                    <Label layoutX="10.0" layoutY="110.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="141.0" style="-fx-background-color: gold;" text="Ingrediente 7: (Opcional)" translateX="60.0" GridPane.rowIndex="5" />
+                                    <Label layoutX="10.0" layoutY="172.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="141.0" style="-fx-background-color: gold;" text="Ingrediente 8: (Opcional)" translateX="60.0" GridPane.rowIndex="6" />
+                                    <Label layoutX="10.0" layoutY="203.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="141.0" style="-fx-background-color: gold;" text="Ingrediente 9: (Opcional)" translateX="60.0" GridPane.rowIndex="7" />
+                                    <Label layoutX="10.0" layoutY="234.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="17.0" prefWidth="141.0" style="-fx-background-color: gold;" text="Ingrediente 10: (Opcional)" translateX="60.0" GridPane.rowIndex="8" />
+                                    <ComboBox fx:id="productIngredientComboBox2" prefWidth="150.0" translateX="5.0" GridPane.columnIndex="1" />
+                                    <ComboBox fx:id="productIngredientComboBox3" prefWidth="150.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <ComboBox fx:id="productIngredientComboBox4" prefWidth="150.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <ComboBox fx:id="productIngredientComboBox5" prefWidth="150.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <ComboBox fx:id="productIngredientComboBox6" prefWidth="150.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <ComboBox fx:id="productIngredientComboBox7" prefWidth="150.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <ComboBox fx:id="productIngredientComboBox8" prefWidth="150.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <ComboBox fx:id="productIngredientComboBox9" prefWidth="150.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <ComboBox fx:id="productIngredientComboBox10" prefWidth="150.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                 </children>
+                              </GridPane>
+                           </center>
+                        </BorderPane>
+                     </content>
+                </Tab>
+                  <Tab text="Lista 2 de Ingredientes">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane layoutX="200.0" layoutY="52.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <center>
+                                    <GridPane BorderPane.alignment="CENTER">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label style="-fx-background-color: gold;" text="Ingrediente 11(Opcional)" translateX="60.0" />
+                                          <ComboBox fx:id="productIngredientComboBox11" prefWidth="150.0" GridPane.columnIndex="1" />
+                                          <ComboBox fx:id="productIngredientComboBox12" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <ComboBox fx:id="productIngredientComboBox13" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <ComboBox fx:id="productIngredientComboBox14" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <ComboBox fx:id="productIngredientComboBox15" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <Label layoutX="10.0" layoutY="33.0" style="-fx-background-color: gold;" text="Ingrediente 12(Opcional)" translateX="60.0" GridPane.rowIndex="1" />
+                                          <Label layoutX="10.0" layoutY="95.0" style="-fx-background-color: gold;" text="Ingrediente 14(Opcional)" translateX="60.0" GridPane.rowIndex="3" />
+                                          <Label layoutX="10.0" layoutY="33.0" style="-fx-background-color: gold;" text="Ingrediente 13(Opcional)" translateX="60.0" GridPane.rowIndex="2" />
+                                          <Label layoutX="10.0" layoutY="219.0" style="-fx-background-color: gold;" text="Ingrediente 15(Opcional)" translateX="60.0" GridPane.rowIndex="4" />
+                                       </children>
+                                    </GridPane>
+                                 </center>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </center>
+      </BorderPane>
+   </children>
+</StackPane>
