@@ -123,8 +123,22 @@ public class Restaurant {
 		
 			
 		Ingredient ingredient = new Ingredient(name, creator);
-			
+		
 		ingredientsList.add(ingredient);
+		
+		for(int i=0; i < ingredientsList.size();i++) {
+		
+			
+			for(int j=0; j < ingredientsList.size()-1;j++) {
+			
+				if(ingredientsList.get(j).getCode()>ingredientsList.get(j+1).getCode()) {
+				
+					Ingredient temp = ingredientsList.get(i);
+					ingredientsList.set(j,ingredientsList.get(j+1));
+					ingredientsList.set(j+1, temp);
+				}
+			}	
+		}	
 		
 		saveData(INGREDIENTS_SAVE_PATH_FILE);
 		
@@ -454,7 +468,7 @@ public class Restaurant {
 		
 		if( (employersList.get(i).getNames().equals(name))&&(employersList.get(i).getLastNames().equals(lastname))&&(employersList.get(i).getIdentificatorNumber().equals(id))) {
 					
-			System.out.println(employersList.get(i).getNames());
+			
 			found = true;	
 			}
 		}	

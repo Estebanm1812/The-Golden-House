@@ -20,7 +20,7 @@
    <top>
       <AnchorPane prefHeight="33.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="527.0" layoutY="5.0" mnemonicParsing="false" text="Volver" />
+            <Button layoutX="527.0" layoutY="5.0" mnemonicParsing="false" onAction="#returnFromUserList" text="Volver" />
          </children>
       </AnchorPane>
    </top>

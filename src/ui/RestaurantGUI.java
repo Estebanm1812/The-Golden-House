@@ -250,6 +250,9 @@ public class RestaurantGUI {
     private ComboBox<String> productProductTypeComboBox;
     
     @FXML
+    private BorderPane firstUserCreationPane;
+    
+    @FXML
     private TextField productSizeTxT;
    
 	public RestaurantGUI(Restaurant restaurant) {
@@ -907,5 +910,50 @@ public class RestaurantGUI {
 		  
 	    }
 	  }
-	  
+	  @FXML
+	  public void returnFromUserList(ActionEvent event) throws IOException {
+
+		  FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+		  fxmlloader.setController(this);
+		  Parent mainMenu = fxmlloader.load();
+		  userListPane.getChildren().clear();
+		  userListPane.setCenter(mainMenu);	
+	    }
+	  @FXML
+	  public  void createFirstUser(ActionEvent event) throws FileNotFoundException, IOException {
+
+		  String name = userCreationNameTxT.getText();
+			 
+			 String lastName = userCreationLastNameTxT.getText();
+			 
+			 String id = userCreationIdTxT.getText();
+			 
+			 String userName = userCreationUserNameTxT.getText();
+			 
+			 String password = userCreationPasswordTxT.getText();
+			 
+			 
+			 if((userCreationNameTxT.getText().equals("")||(userCreationPasswordTxT.getText().equals(""))||(userCreationIdTxT.getText().equals(""))||(userCreationUserNameTxT.getText().equals(""))||(userCreationPasswordTxT.getText().equals("")))) {
+			 
+				 Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Information Dialog");
+					alert.setHeaderText(null);
+					alert.setContentText("El Usuario fue creado exitosamente");
+				 
+			 }else{
+			restaurant.addEmployee(name, lastName, id);
+			 restaurant.addUser(name, lastName, id, userName, password);
+		 		Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("El Usuario fue creado exitosamente");
+				alert.showAndWait();
+				
+			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+			fxmlloader.setController(this);
+			Parent mainMenu = fxmlloader.load();
+			firstUserCreationPane.getChildren().clear();
+			firstUserCreationPane.setCenter(mainMenu);	
+			}
+	    }
 }

@@ -60,21 +60,32 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pane.fxml"));
 		FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("LoginPane.fxml"));
+		FXMLLoader fxmlLoader3 = new FXMLLoader(getClass().getResource("firstUserCreationPane.fxml"));
 		
 		fxmlLoader.setController(restaurantGUI);
 		
 		fxmlLoader2.setController(restaurantGUI);
 		
+		fxmlLoader3.setController(restaurantGUI);
 		
 		Parent root2 = fxmlLoader2.load();
 		
+		Parent root3 = fxmlLoader3.load();
 		
+		if(restaurant.getEmployeeList().isEmpty()) {
+			Scene scene2 = new Scene(root3);
+			
+			primaryStage.setTitle("The Golden House");
+			primaryStage.setScene(scene2);
+			primaryStage.show();
+			
+		}else {
 		Scene scene2 = new Scene(root2);
 		
 		primaryStage.setTitle("The Golden House");
 		primaryStage.setScene(scene2);
 		primaryStage.show();
-		
+		}
 		
 		
 	}
