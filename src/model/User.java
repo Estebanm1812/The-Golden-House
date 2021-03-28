@@ -2,10 +2,11 @@ package model;
 
 public class User extends Employee{
 
+	private static final long serialVersionUID = 8L;
+
 	private String userName;
 	
 	private String password;
-	
 	
 	
 	public User(String name, String lastName, String identificatorNumber, String userName, String password) {

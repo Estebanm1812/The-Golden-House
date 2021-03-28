@@ -9,12 +9,14 @@ public class ProductType implements Serializable {
 	private String state;
 	private String creator;
 	private String lastModifie;
+	private double code;
 	
 	public ProductType(String name, String currentUser) {
 	
 		this.name = name;
 		state = "ACTIVO";
 		creator = currentUser;
+		code = (Math.random()*((1000000-00000001)+1)+0000001);
 	}
 	public String getName() {
 		return name;
@@ -40,6 +42,11 @@ public class ProductType implements Serializable {
 	public void setLastModifie(String name) {
 		lastModifie = name;
 	}
-	
+	public double getCode() {
+		return code;
+	}
+	public void setCode(double code) {
+		this.code = code;
+	}
 	
 }

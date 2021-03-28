@@ -14,6 +14,8 @@ public class Product implements Serializable{
 	
 	private String [] ingredients;
 	
+	private double code;
+	
 	public Product(String name, double prices, String sizes, String [] ingredients) {
 	
 		this.name = name;
@@ -23,6 +25,8 @@ public class Product implements Serializable{
 		this.sizes = sizes;
 		
 		this.ingredients = ingredients;
+		
+		code = (Math.random()*((1000000-00000001)+1)+0000001);
 	}
 	public String getName() {
 		return name;
@@ -49,5 +53,11 @@ public class Product implements Serializable{
 	}
 	public void setIngredients(String [] ingredients) {
 		this.ingredients = ingredients;
+	}
+	public double getCode() {
+		return code;
+	}
+	public void setCode(Double code) {
+		this.code = code;
 	}
 }

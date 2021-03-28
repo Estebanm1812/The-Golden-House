@@ -15,12 +15,15 @@ public class Ingredient implements Serializable{
 	
 	private String lastModifie;
 	
+	private double code;
+	
 	public Ingredient(String ingredientName, String creator) {
 	
 		this.ingredientName = ingredientName;
 		able = true;
 		this.creator = creator;
 		lastModifie = creator;
+		code = (Math.random()*((1000000-00000001)+1)+0000001);
 	}
 	public String getIngredintName() {
 		return ingredientName;
@@ -46,6 +49,9 @@ public class Ingredient implements Serializable{
 	}
 	public void setLastModifie(String lastModifie) {
 		this.lastModifie = lastModifie;
+	}
+	public double getCode() {
+		return code;
 	}
 	
 }

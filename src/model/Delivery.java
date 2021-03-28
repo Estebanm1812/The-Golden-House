@@ -7,33 +7,33 @@ public class Delivery implements Serializable{
 
 	private static final long serialVersionUID = 2L;
 
-	private String code;
+	private double code;
 	
 	private String state;
 	
 	private String [] productList;
 	
-	private Customer customer;
+	private String customer;
 	
-	private Employee employee;
+	private String employee;
 	
 	private Date date;
 	
-	public Delivery(String code, String state, String[] productList, Customer customer,Employee employee, Date date) {
+	public Delivery(String[] productList, String customer,String employee, Date date) {
 		
-		this.code = code;
-		this.state = state;
+		code = (Math.random()*((1000000-00000001)+1)+0000001);
+		state = "SOLICITADO";
 		this.productList = productList;
 		this.customer = customer;
 		this.date = date;
 		this.employee = employee;
 	}
 
-	public String getCode() {
+	public double getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(double code) {
 		this.code = code;
 	}
 
@@ -53,11 +53,11 @@ public class Delivery implements Serializable{
 		this.productList = productList;
 	}
 
-	public Customer getCustomer() {
+	public String getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(Customer customer) {
+	public void setCustomer(String customer) {
 		this.customer = customer;
 	}
 
@@ -68,10 +68,10 @@ public class Delivery implements Serializable{
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public Employee getEmployee() {
+	public String getEmployee() {
 		return employee;
 	}
-	public void setEmployee(Employee employee) {
+	public void setEmployee(String employee) {
 		this.employee = employee;
 		
 	}

@@ -43,7 +43,7 @@ public class Restaurant {
 	
 	private List<ProductType> productTypeList;
 	
-	private String currentUser;
+	private User currentUser;
 	
 	
 	public Restaurant() throws ClassNotFoundException, IOException{
@@ -62,7 +62,7 @@ public class Restaurant {
 		
 		productTypeList = new ArrayList<ProductType>();
 		
-		currentUser = "";
+	
 		
 	}
 	public String getUsersSavePath() {
@@ -83,10 +83,10 @@ public class Restaurant {
 	public String getDeliverySavePath() {
 		return DELIVERS_SAVE_PATH_FILE;
 	}
-	public String getCurrentUser() {
+	public User getCurrentUser() {
 		return currentUser;
 	}
-	public void setCurrentUser(String name) {
+	public void setCurrentUser(User name) {
 		currentUser = name;
 	}
 	
@@ -482,7 +482,7 @@ public class Restaurant {
 	}
 	public void addProductType(String name) throws FileNotFoundException, IOException {
 		
-		ProductType pt1 = new ProductType(name,getCurrentUser());
+		ProductType pt1 = new ProductType(name,getCurrentUser().getNames());
 		
 		productTypeList.add(pt1);
 		saveData(PRODUCT_TYPE_SAVE_PATH_FILE);
@@ -509,5 +509,21 @@ public class Restaurant {
 		Product product1 = new Product(name,price,size,ingredients);
 		productList.add(product1);
 		saveData(PRODUCTS_SAVE_PATH_FILE);
+	}
+	public int findUserPosition(String user1) {
+		
+		int pos = 0;
+		
+		boolean found = false;
+		
+		for(int i=0; i < userList.size() && found==false;i++) {
+		
+			if(userList.get(i).getUserName().equals(user1)) {
+			
+				pos = i;
+				found = true;
+			}
+		}
+		return pos;
 	}
 }

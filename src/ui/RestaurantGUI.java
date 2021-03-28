@@ -344,6 +344,7 @@ public class RestaurantGUI {
 		 
 		 String password = passwordLoginTxT.getText().trim();
 		 
+		 int userposition = -1;
 		 
 		 if((userName.equals(""))||(password.equals(""))) {
 		 
@@ -365,7 +366,8 @@ public class RestaurantGUI {
 		 			Parent mainMenu = fxmlloader.load();
 		 			loginPane.getChildren().clear();
 		 			loginPane.setCenter(mainMenu);
-		 			restaurant.setCurrentUser(userName);
+		 			userposition = restaurant.findUserPosition(userName);
+		 			restaurant.setCurrentUser(restaurant.getUserList().get(userposition));
 		 			}else {
 		 				
 		 				 Alert alert = new Alert(AlertType.INFORMATION);
@@ -588,7 +590,7 @@ public class RestaurantGUI {
 		 		
 		 		
 		 		try {
-					restaurant.addIngredient(name, restaurant.getCurrentUser());
+					restaurant.addIngredient(name, restaurant.getCurrentUser().getUserName());
 				} catch (FileNotFoundException e) {
 					
 					e.printStackTrace();
@@ -813,8 +815,7 @@ public class RestaurantGUI {
 		  
 		  
 	    }
-	  @SuppressWarnings("unchecked")
-	@FXML
+	  @FXML
 	  public  void openProductCreationPane(ActionEvent event) throws IOException {
 
 		  FXMLLoader fxml = new FXMLLoader(getClass().getResource("productCreationPane.fxml"));

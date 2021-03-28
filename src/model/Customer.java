@@ -12,6 +12,8 @@ public class Customer extends Person implements Serializable{
 	
 	private String comment;
 	
+	private double code;
+	
 	
 		public Customer(String names,String lastNames,String identificatorNumber, String addres, String phoneNumber, String comment ) {
 			
@@ -24,6 +26,7 @@ public class Customer extends Person implements Serializable{
 		
 		this.comment = comment;
 	
+		code = (Math.random()*((1000000-00000001)+1)+0000001);
 		}
 
 		public String getNames() {
@@ -73,5 +76,10 @@ public class Customer extends Person implements Serializable{
 		public void setComment(String comment) {
 			this.comment = comment;
 		}
-		
+		public double getCode() {
+			return code;
+		}
+		public void setCode(double code) {
+			this.code = code;
+		}
 	}
