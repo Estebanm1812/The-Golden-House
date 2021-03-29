@@ -13,13 +13,19 @@ public class Delivery implements Serializable{
 	
 	private String [] productList;
 	
+	private double [] productPrices;
+	
+	private double [] amount;
+	
+	private double totalPrice;
+	
 	private String customer;
 	
 	private String employee;
 	
 	private Date date;
 	
-	public Delivery(String[] productList, String customer,String employee, Date date) {
+	public Delivery(String[] productList, String customer,String employee, Date date, double [] productPrices, double amount) {
 		
 		code = (Math.random()*((1000000-00000001)+1)+0000001);
 		state = "SOLICITADO";
@@ -27,6 +33,7 @@ public class Delivery implements Serializable{
 		this.customer = customer;
 		this.date = date;
 		this.employee = employee;
+		totalPrice = calculateTotalPrice();
 	}
 
 	public double getCode() {
@@ -75,6 +82,36 @@ public class Delivery implements Serializable{
 		this.employee = employee;
 		
 	}
+	public double [] productPrices() {
+		return productPrices;
+	}
+	public void setProductPrices(double [] prices) {
+		productPrices = prices;
+	}
 	
+	public double [] getAmount() {
+		return amount;
+	}
+	public void setAmount(double [] amount) {
+		this.amount = amount;
+	}
+	public double calculateTotalPrice() {
+		
+		double total = 0;
+		
+		for(int i=0; i < productList.length;i++) {
+		
+			total+= productPrices[i] * amount[i];
+			
+			
+		}
+		return total;
+	}
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 	
 }

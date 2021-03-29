@@ -268,7 +268,7 @@ public class Restaurant {
 	    }
 	    br.close();
 	  }
-	private void addDelivery(String string, String string2, String string3) {
+	public void addDelivery(String string, String string2, String string3) {
 	
 		
 	}
