@@ -238,8 +238,8 @@ public class Restaurant {
 	}
 	
 	
-	public void importEmployee() throws IOException{
-		    BufferedReader br = new BufferedReader(new FileReader(EMPLOYEERS_SAVE_PATH_FILE));
+	public void importEmployee(String file) throws IOException{
+		    BufferedReader br = new BufferedReader(new FileReader(file));
 		    String line = br.readLine();
 		    while(line!=null){
 		      String[] parts = line.split(";");
@@ -258,8 +258,8 @@ public class Restaurant {
 	    }
 	    br.close();
 	  }
-	public void importDeliver() throws IOException{
-	    BufferedReader br = new BufferedReader(new FileReader(DELIVERS_SAVE_PATH_FILE));
+	public void importDeliver(String file) throws IOException{
+	    BufferedReader br = new BufferedReader(new FileReader(file));
 	    String line = br.readLine();
 	    while(line!=null){
 	      String[] parts = line.split(";");
@@ -395,6 +395,17 @@ public class Restaurant {
 
 	    pw.close();
 	  }
+	public void exportProductData(String fileName) throws FileNotFoundException{
+		PrintWriter pw = new PrintWriter(fileName);
+		
+		for(int i=0; i < productList.size();i++) {
+		Product myProduct = productList.get(i);
+		pw.println(myProduct.getName()+";"+myProduct.getPrices()+";"+myProduct.getSize()+";"+myProduct.getAllIngredients());
+			
+		}
+		pw.close();
+	}
+	
 	public void exportUserData(String fileName) throws FileNotFoundException{
 	    PrintWriter pw = new PrintWriter(fileName);
 

@@ -60,4 +60,14 @@ public class Product implements Serializable{
 	public void setCode(Double code) {
 		this.code = code;
 	}
+	public String getAllIngredients() {
+		
+		String all = "";
+		
+		for(int i=0; i < ingredients.length;i++) {
+		
+			all+= ingredients[i] + ";";
+		}
+		return all;
+	}
 }

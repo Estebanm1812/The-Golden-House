@@ -1,7 +1,9 @@
 package ui;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
@@ -21,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import model.Customer;
 import model.Employee;
 import model.Ingredient;
@@ -230,22 +234,7 @@ public class RestaurantGUI {
 
     @FXML
     private ComboBox<String> productIngredientComboBox10;
-
-    @FXML
-    private ComboBox<String> productIngredientComboBox11;
-
-    @FXML
-    private ComboBox<String> productIngredientComboBox12;
-
-    @FXML
-    private ComboBox<String> productIngredientComboBox13;
-
-    @FXML
-    private ComboBox<String> productIngredientComboBox14;
-
-    @FXML
-    private ComboBox<String> productIngredientComboBox15;
-    
+   
     @FXML
     private ComboBox<String> productProductTypeComboBox;
     
@@ -842,11 +831,6 @@ public class RestaurantGUI {
 		  productIngredientComboBox8.getItems().add(ingredient);
 		  productIngredientComboBox9.getItems().add(ingredient);
 		  productIngredientComboBox10.getItems().add(ingredient);
-		  productIngredientComboBox11.getItems().add(ingredient);
-		  productIngredientComboBox12.getItems().add(ingredient);
-		  productIngredientComboBox13.getItems().add(ingredient);
-		  productIngredientComboBox14.getItems().add(ingredient);
-		  productIngredientComboBox15.getItems().add(ingredient);
 		  }
 		  
 		  for(int i=0; i< restaurant.getProductTypeList().size();i++) {
@@ -875,35 +859,150 @@ public class RestaurantGUI {
 		  
 		  double price = Double.parseDouble(productPriceTxT.getText());
 		  
-		  String [] ingredients = new String[15];
+		  String [] ingredients;
 		  
 		  String size = productSizeTxT.getText().trim();
 		  
+		  int count = 0;
+		  
+		  if((productIngredientComboBox.getAccessibleText().equals(""))==false) {
+			  count+=1;
+			  
+		  }
+		  if((productIngredientComboBox2.getAccessibleText().equals(""))==false) {
+			  count+=1;
+			  
+		  }
+		  if((productIngredientComboBox3.getAccessibleText().equals(""))==false) {
+			  count+=1;
+			  
+		  }
+		  if((productIngredientComboBox4.getAccessibleText().equals(""))==false) {
+			  count+=1;
+			  
+		  }
+		  if((productIngredientComboBox5.getAccessibleText().equals(""))==false) {
+			  count+=1;
+			  
+		  }
+		  if((productIngredientComboBox6.getAccessibleText().equals(""))==false) {
+			  count+=1;
+			  
+		  }
+		  if((productIngredientComboBox7.getAccessibleText().equals(""))==false) {
+			  count+=1;
+			  
+		  }
+		  if((productIngredientComboBox8.getAccessibleText().equals(""))==false) {
+			  count+=1;
+			  
+		  }
+		  if((productIngredientComboBox9.getAccessibleText().equals(""))==false) {
+			  count+=1;
+			  
+		  }
+		  if((productIngredientComboBox10.getAccessibleText().equals(""))==false) {
+			  count+=1;
+			  
+		  }
+		  int added=0;
+		  ingredients = new String[count];
+		  for(int i=0; i < count && added!=count;i++) {
+		  boolean out = false;
+			  
+			  if(ingredients[i].isEmpty() && out==false) {
+			  
+				  if(productIngredientComboBox.getAccessibleText().equals("")!=false) {
+				  
+					  ingredients[i] = productIngredientComboBox.getAccessibleText();
+					  out = true;
+					  added+=1;
+				  }
+				  if(productIngredientComboBox2.getAccessibleText().equals("")!=false) {
+					  
+					  ingredients[i] = productIngredientComboBox2.getAccessibleText();
+					  out = true;
+					  added+=1;
+				  }
+				  if(productIngredientComboBox3.getAccessibleText().equals("")!=false) {
+					  
+					  ingredients[i] = productIngredientComboBox3.getAccessibleText();
+					  out = true;
+					  added+=1;
+				  }
+				  if(productIngredientComboBox4.getAccessibleText().equals("")!=false) {
+					  
+					  ingredients[i] = productIngredientComboBox4.getAccessibleText();
+					  out = true;
+					  added+=1;
+				  }
+				  if(productIngredientComboBox5.getAccessibleText().equals("")!=false) {
+					  
+					  ingredients[i] = productIngredientComboBox5.getAccessibleText();
+					  out = true;
+					  added+=1;
+				  }
+				  if(productIngredientComboBox6.getAccessibleText().equals("")!=false) {
+					  
+					  ingredients[i] = productIngredientComboBox6.getAccessibleText();
+					  out = true;
+					  added+=1;
+				  }
+				  if(productIngredientComboBox7.getAccessibleText().equals("")!=false) {
+					  
+					  ingredients[i] = productIngredientComboBox7.getAccessibleText();
+					  out = true;
+					  added+=1;
+				  }
+				  if(productIngredientComboBox8.getAccessibleText().equals("")!=false) {
+					  
+					  ingredients[i] = productIngredientComboBox8.getAccessibleText();
+					  out = true;
+					  added+=1;
+				  }
+				  if(productIngredientComboBox9.getAccessibleText().equals("")!=false) {
+					  
+					  ingredients[i] = productIngredientComboBox9.getAccessibleText();
+					  out = true;
+					  added+=1;
+				  }
+				  if(productIngredientComboBox10.getAccessibleText().equals("")!=false) {
+					  
+					  ingredients[i] = productIngredientComboBox10.getAccessibleText();
+					  out = true;
+					  added+=1;
+				  }
+			  }
+		  }
 		  boolean found = restaurant.findProduct(name, ingredients,price);
 		  
-		  if((productNameTxT.getText().equals(""))||(productPriceTxT.getText().equals(""))||(size.equals(""))){
+		  if((productNameTxT.getText().equals(""))||(productPriceTxT.getText().equals(""))||(size.equals(""))||productIngredientComboBox.getAccessibleText().equals("")){
 		  
-			  
+			  Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("Debe de completar todos los datos obligatorios");
+				alert.showAndWait();
 			  
 			  
 			  
 		  if(found==true) {
 		  
-			  Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information Dialog");
-				alert.setHeaderText(null);
-				alert.setContentText("Ya existe ese Producto con el mismo precio");
-				alert.showAndWait();
+			  Alert alert2 = new Alert(AlertType.INFORMATION);
+				alert2.setTitle("Information Dialog");
+				alert2.setHeaderText(null);
+				alert2.setContentText("Ya existe ese Producto con el mismo precio");
+				alert2.showAndWait();
 			  
 		  }else {
 			  
 			  restaurant.addProduct(name, ingredients, size, price);
 			  
-			  Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information Dialog");
-				alert.setHeaderText(null);
-				alert.setContentText("Se ha añadido el Producto");
-				alert.showAndWait();
+			  Alert alert3 = new Alert(AlertType.INFORMATION);
+				alert3.setTitle("Information Dialog");
+				alert3.setHeaderText(null);
+				alert3.setContentText("Se ha añadido el Producto");
+				alert3.showAndWait();
 			  
 			  
 		  }
@@ -956,4 +1055,185 @@ public class RestaurantGUI {
 			firstUserCreationPane.setCenter(mainMenu);	
 			}
 	    }
+	  @FXML
+	  public  void importEmployees(ActionEvent event) {
+
+		  FileChooser fileChooser = new FileChooser();
+	    	fileChooser.setTitle("Open Resource File");
+	    	File file = fileChooser.showOpenDialog(null);
+	    	if(file != null) {
+	    		try {
+					restaurant.importEmployee(file.getAbsolutePath());
+					 Alert alert = new Alert(AlertType.INFORMATION);
+					    alert.setTitle("The Golden House");
+					    alert.setHeaderText("Annoucement");
+					    alert.setContentText("Los empleados se han importado correctamente");
+					
+					    alert.showAndWait();
+				} catch (IOException e) {
+					 Alert alert = new Alert(AlertType.INFORMATION);
+					    alert.setTitle("The Golden House");
+					    alert.setHeaderText("Error");
+					    alert.setContentText("Los Empleados no se han importado correctamente ");
+					
+					    alert.showAndWait();
+				}
+	    }
+	  }
+	  @FXML
+	  public  void importIngredients(ActionEvent event) {
+		  
+		  FileChooser fileChooser = new FileChooser();
+	    	fileChooser.setTitle("Open Resource File");
+	    	File file = fileChooser.showOpenDialog(null);
+	    	if(file != null) {
+	    		try {
+					restaurant.importIngredients(file.getAbsolutePath());
+					 Alert alert = new Alert(AlertType.INFORMATION);
+					    alert.setTitle("The Golden House");
+					    alert.setHeaderText("Annoucement");
+					    alert.setContentText("Los Ingredientes se han importado correctamente");
+					
+					    alert.showAndWait();
+				} catch (IOException e) {
+					 Alert alert = new Alert(AlertType.INFORMATION);
+					    alert.setTitle("The Golden House");
+					    alert.setHeaderText("Error");
+					    alert.setContentText("Los Ingredientes no se han importado correctamente ");
+					
+					    alert.showAndWait();
+				}
+		  
+		 
+	    }
+	  }
+	  @FXML
+	  public  void importUsers(ActionEvent event) {
+
+		  FileChooser fileChooser = new FileChooser();
+	    	fileChooser.setTitle("Open Resource File");
+	    	File file = fileChooser.showOpenDialog(null);
+	    	if(file != null) {
+	    		try {
+					restaurant.importUsers(file.getAbsolutePath());
+					 Alert alert = new Alert(AlertType.INFORMATION);
+					    alert.setTitle("The Golden House");
+					    alert.setHeaderText("Annoucement");
+					    alert.setContentText("Los Usuarios se han importado correctamente");
+					
+					    alert.showAndWait();
+				} catch (IOException e) {
+					 Alert alert = new Alert(AlertType.INFORMATION);
+					    alert.setTitle("The Golden House");
+					    alert.setHeaderText("Error");
+					    alert.setContentText("Los Usuarios no se han importado correctamente ");
+					
+					    alert.showAndWait();
+				}
+		  
+		 
+	    }
+		  
+	    }
+	  @FXML
+	  public  void importCustomers(ActionEvent event) {
+
+		  FileChooser fileChooser = new FileChooser();
+	    	fileChooser.setTitle("Open Resource File");
+	    	File file = fileChooser.showOpenDialog(null);
+	    	if(file != null) {
+	    		try {
+					restaurant.importCustomers(file.getAbsolutePath());
+					 Alert alert = new Alert(AlertType.INFORMATION);
+					    alert.setTitle("The Golden House");
+					    alert.setHeaderText("Annoucement");
+					    alert.setContentText("Los Clientes se han importado correctamente");
+					
+					    alert.showAndWait();
+				} catch (IOException e) {
+					 Alert alert = new Alert(AlertType.INFORMATION);
+					    alert.setTitle("The Golden House");
+					    alert.setHeaderText("Error");
+					    alert.setContentText("Los Clientes no se han importado correctamente ");
+					
+					    alert.showAndWait();
+				}
+		  
+		 
+	    }
+	    	
+	    }
+	  @FXML
+	  public void exportCustomers(ActionEvent event) throws FileNotFoundException {
+
+		  TextInputDialog dialog = new TextInputDialog("");
+		  dialog.setTitle("The Golden House");
+		  dialog.setHeaderText("");
+		  dialog.setContentText("Ingrese el nombre del archivo al que desea exportar la informacion");
+
+		  Optional<String> result = dialog.showAndWait();
+		  if (result.isPresent()){
+		     restaurant.exportCustomerData(result.get());
+		  }
+		  
+	  }
+	    @FXML
+	   public void exportEmployees(ActionEvent event) throws FileNotFoundException {
+
+	    	TextInputDialog dialog = new TextInputDialog("");
+			  dialog.setTitle("The Golden House");
+			  dialog.setHeaderText("");
+			  dialog.setContentText("Ingrese el nombre del archivo al que desea exportar la informacion");
+
+			  Optional<String> result = dialog.showAndWait();
+			  if (result.isPresent()){
+			     restaurant.exportEmployeeData(result.get());
+			  }
+	    	
+	    }
+
+	    @FXML
+	   public void exportIngredients(ActionEvent event) throws FileNotFoundException {
+
+	    	TextInputDialog dialog = new TextInputDialog("");
+			  dialog.setTitle("The Golden House");
+			  dialog.setHeaderText("");
+			  dialog.setContentText("Ingrese el nombre del archivo al que desea exportar la informacion");
+
+			  Optional<String> result = dialog.showAndWait();
+			  if (result.isPresent()){
+			     restaurant.exportIngredientData(result.get());
+			  }
+	    	
+	    }
+
+	    @FXML
+	   public void exportProducts(ActionEvent event) throws FileNotFoundException {
+
+	    	TextInputDialog dialog = new TextInputDialog("");
+			  dialog.setTitle("The Golden House");
+			  dialog.setHeaderText("");
+			  dialog.setContentText("Ingrese el nombre del archivo al que desea exportar la informacion");
+
+			  Optional<String> result = dialog.showAndWait();
+			  if (result.isPresent()){
+			     restaurant.exportProductData(result.get());
+			  }
+	    	
+	    }
+
+	    @FXML
+	   public void exportUsers(ActionEvent event) throws FileNotFoundException {
+
+	    	TextInputDialog dialog = new TextInputDialog("");
+			  dialog.setTitle("The Golden House");
+			  dialog.setHeaderText("");
+			  dialog.setContentText("Ingrese el nombre del archivo al que desea exportar la informacion");
+
+			  Optional<String> result = dialog.showAndWait();
+			  if (result.isPresent()){
+			     restaurant.exportUserData(result.get());
+			  }
+	    	
+	    }	
 }
