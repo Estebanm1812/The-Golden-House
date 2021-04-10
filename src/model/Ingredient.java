@@ -9,7 +9,7 @@ public class Ingredient implements Serializable{
 
 	private String ingredientName;
 	
-	private boolean able;
+	private String state;
 	
 	private String creator;
 	
@@ -20,7 +20,7 @@ public class Ingredient implements Serializable{
 	public Ingredient(String ingredientName, String creator) {
 	
 		this.ingredientName = ingredientName;
-		able = true;
+		state = "ACTIVO";
 		this.creator = creator;
 		lastModifie = creator;
 		code = (Math.random()*((1000000-00000001)+1)+0000001);
@@ -32,11 +32,11 @@ public class Ingredient implements Serializable{
 		this.ingredientName = ingredientName;
 		
 	}
-	public boolean isAble() {
-		return able;
+	public String getState() {
+		return state;
 	}
-	public void setAble(boolean able) {
-		this.able = able;
+	public void setState(String able) {
+		state = able;
 	}
 	public String getCreator() {
 		return creator;

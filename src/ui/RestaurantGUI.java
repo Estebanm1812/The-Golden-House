@@ -397,10 +397,52 @@ public class RestaurantGUI {
 		 customerList.setItems(observableList);
 		 
 		 customerTableName.setCellValueFactory(new PropertyValueFactory<Customer,String>("names"));
+		 customerTableName.setCellFactory(TextFieldTableCell.forTableColumn());
+		 customerTableName.setOnEditCommit(new EventHandler<CellEditEvent<Customer,String>>(){
+
+			@Override
+			public void handle(CellEditEvent<Customer, String> event) {
+				event.getRowValue().setNames(event.getNewValue());
+				
+			}
+			 
+		 });
+		 
 		 customerTableLastnames.setCellValueFactory(new PropertyValueFactory<Customer,String>("lastNames"));
+		 customerTableLastnames.setCellFactory(TextFieldTableCell.forTableColumn());
+		 customerTableLastnames.setOnEditCommit(new EventHandler<CellEditEvent<Customer, String>>(){
+
+			@Override
+			public void handle(CellEditEvent<Customer, String> event) {
+				event.getRowValue().setLastNames(event.getNewValue());
+				
+			}
+			 
+		 });
+		 
 		 customerTableID.setCellValueFactory(new PropertyValueFactory<Customer,String>("identificatorNumber"));
 		 customerTableAddres.setCellValueFactory(new PropertyValueFactory<Customer,String>("addres"));
+		 customerTableAddres.setCellFactory(TextFieldTableCell.forTableColumn());
+		 customerTableAddres.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Customer,String>>() {
+
+			@Override
+			public void handle(CellEditEvent<Customer, String> event) {
+				event.getRowValue().setAddres(event.getNewValue());
+				
+			}
+		
+		 });
 		 customerTablePhone.setCellValueFactory(new PropertyValueFactory<Customer,String>("phoneNumber"));
+		 customerTablePhone.setCellFactory(TextFieldTableCell.forTableColumn());
+		 customerTablePhone.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Customer,String>>() {
+
+			@Override
+			public void handle(CellEditEvent<Customer, String> event) {
+				event.getRowValue().setPhoneNumber(event.getNewValue());
+				
+			}
+		
+		 });
 	 }
 	 
 	 public void initializeIngredientList(){
@@ -411,9 +453,32 @@ public class RestaurantGUI {
 	ingredientsList.setItems(observableList);		
 		 
 	ingredientNameTable.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("name"));
+	ingredientNameTable.setCellFactory(TextFieldTableCell.forTableColumn());
+	ingredientNameTable.setOnEditCommit(new EventHandler<CellEditEvent<Ingredient,String>>(){
+
+		@Override
+		public void handle(CellEditEvent<Ingredient, String> event) {
+			event.getRowValue().setIngredientName(event.getNewValue());
+			event.getRowValue().setLastModifie(restaurant.getCurrentUser().getNames()+ " "+restaurant.getCurrentUser().getLastNames());
+		}
+			
+	 });
+	
 	ingredientStateTable.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("state") );
+	ingredientStateTable.setOnEditCommit(new EventHandler<CellEditEvent<Ingredient,String>>(){
+
+		@Override
+		public void handle(CellEditEvent<Ingredient, String> event) {
+			event.getRowValue().setState("INACTIVE");
+			event.getRowValue().setLastModifie(restaurant.getCurrentUser().getNames()+" "+ restaurant.getCurrentUser().getLastNames());
+			
+		}
+		
+	});
 	ingredientCreatorTable.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("creator")); 
+	
 	ingredientLastModifiedTable.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("lastModifie"));
+	
 	
 	 }
 	 @FXML
@@ -480,7 +545,32 @@ public class RestaurantGUI {
 			userTable.setItems(observableList);
 			
 			userNameTable.setCellValueFactory(new PropertyValueFactory<User,String>("names"));
+			userNameTable.setCellFactory(TextFieldTableCell.forTableColumn());
+			userNameTable.setOnEditCommit(new EventHandler<CellEditEvent<User,String>>(){
+
+				@Override
+				public void handle(CellEditEvent<User, String> event) {
+		
+					event.getRowValue().setUserName(event.getNewValue());
+					
+				}
+				
+				
+			});
+			
 			userLastNameTable.setCellValueFactory(new PropertyValueFactory<User,String>("lastNames"));
+			userLastNameTable.setCellFactory(TextFieldTableCell.forTableColumn());
+			userLastNameTable.setOnEditCommit(new EventHandler<CellEditEvent<User,String>>(){
+
+				@Override
+				public void handle(CellEditEvent<User, String> event) {
+				
+					event.getRowValue().setLastNames(event.getNewValue());
+		
+				}
+				
+			});
+			
 			userIDTable.setCellValueFactory(new PropertyValueFactory<User,String>("identificatorNumber"));
 			userUsernameTable.setCellValueFactory(new PropertyValueFactory<User,String>("userName"));
 		 }
