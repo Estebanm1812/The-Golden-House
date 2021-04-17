@@ -32,6 +32,7 @@ import javafx.stage.FileChooser;
 import model.Customer;
 import model.Employee;
 import model.Ingredient;
+import model.ProductType;
 import model.Restaurant;
 import model.User;
 
@@ -95,7 +96,6 @@ public class RestaurantGUI {
     @FXML
     private TableColumn<Employee, String> employeeStateTable;
 
-    
     @FXML
     private BorderPane customerCreationPane;
     
@@ -247,6 +247,21 @@ public class RestaurantGUI {
     
     @FXML
     private TextField productSizeTxT;
+    
+    @FXML
+    private BorderPane productTypePane;
+
+    @FXML
+    private TableView<ProductType> producTypetList;
+
+    @FXML
+    private TableColumn<ProductType,String> productTypeName;
+
+    @FXML
+    private TableColumn<ProductType, String> productTypeCreator;
+
+    @FXML
+    private TableColumn<ProductType, String> productTypeLastModified;
    
 	public RestaurantGUI(Restaurant restaurant) {
 	
@@ -390,11 +405,32 @@ public class RestaurantGUI {
 			loginPane.setCenter(root1);
 		 
 	    }
+	 public void initializeProductTypeList() {
+		
+		 ObservableList<ProductType> observableList;
+		 observableList = FXCollections.observableArrayList(restaurant.getProductTypeList());
+		 producTypetList.setItems(observableList);
+		 producTypetList.setEditable(true);
+		 
+		 productTypeName.setCellValueFactory(new PropertyValueFactory<ProductType,String>("name"));
+		 productTypeName.setCellFactory(TextFieldTableCell.forTableColumn());
+		 productTypeName.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<ProductType,String>>() {
+
+			@Override
+			public void handle(CellEditEvent<ProductType, String> event) {
+				event.getRowValue().setName(event.getNewValue());
+				event.getRowValue().setLastModifie(restaurant.getCurrentUser().getNames()+restaurant.getCurrentUser().getLastNames());
+			}
+		 });
+		 productTypeCreator.setCellValueFactory(new PropertyValueFactory<ProductType,String>("creator"));
+		 productTypeLastModified.setCellValueFactory(new PropertyValueFactory<ProductType,String>("lastModified"));
+	 }
 	 public void initializeCustomerList() {
 		 
 		 ObservableList<Customer> observableList;
 		 observableList = FXCollections.observableArrayList(restaurant.getCustomerList());
 		 customerList.setItems(observableList);
+		 customerList.setEditable(true);
 		 
 		 customerTableName.setCellValueFactory(new PropertyValueFactory<Customer,String>("names"));
 		 customerTableName.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -449,10 +485,11 @@ public class RestaurantGUI {
 		 
 	ObservableList<Ingredient> observableList;
 	observableList = FXCollections.observableArrayList(restaurant.getIngredientsList());
-		 
+	
 	ingredientsList.setItems(observableList);		
-		 
-	ingredientNameTable.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("name"));
+	ingredientsList.setEditable(true);	 
+	
+	ingredientNameTable.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("IngredintName"));
 	ingredientNameTable.setCellFactory(TextFieldTableCell.forTableColumn());
 	ingredientNameTable.setOnEditCommit(new EventHandler<CellEditEvent<Ingredient,String>>(){
 
@@ -464,7 +501,7 @@ public class RestaurantGUI {
 			
 	 });
 	
-	ingredientStateTable.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("state") );
+	ingredientStateTable.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("State") );
 	ingredientStateTable.setOnEditCommit(new EventHandler<CellEditEvent<Ingredient,String>>(){
 
 		@Override
@@ -477,7 +514,7 @@ public class RestaurantGUI {
 	});
 	ingredientCreatorTable.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("creator")); 
 	
-	ingredientLastModifiedTable.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("lastModifie"));
+	ingredientLastModifiedTable.setCellValueFactory(new PropertyValueFactory<Ingredient,String>("LastModifie"));
 	
 	
 	 }
@@ -489,8 +526,8 @@ public class RestaurantGUI {
 		 
 		 Parent root1 = fxml1.load();
 		 
-		 ingredientListPane.getChildren().clear();
-		 ingredientListPane.getChildren().setAll(root1);
+		 mainMenuPane.getChildren().clear();
+		 mainMenuPane.getChildren().setAll(root1);
 		 initializeIngredientList();
 		 
 	    }
@@ -543,6 +580,7 @@ public class RestaurantGUI {
 			observableList = FXCollections.observableArrayList(restaurant.getUserList());
 			 
 			userTable.setItems(observableList);
+			userTable.setEditable(true);
 			
 			userNameTable.setCellValueFactory(new PropertyValueFactory<User,String>("names"));
 			userNameTable.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -1321,5 +1359,34 @@ public class RestaurantGUI {
 			     restaurant.exportUserData(result.get());
 			  }
 	    	
-	    }	
+	    }
+	    @FXML
+	  public void loadProductTypeList(ActionEvent event) throws IOException {
+	    
+	    FXMLLoader fxml = new FXMLLoader(getClass().getResource("productTypeListPane.fxml"));	
+	    fxml.setController(this);
+		Parent list = fxml.load();
+		  mainMenuPane.getChildren().clear();
+		  mainMenuPane.setCenter(list);		
+	    	initializeProductTypeList();
+	    }    
+	    @FXML
+	  public void returnFromMenuProductTypeList(ActionEvent event) throws IOException {
+
+	    	FXMLLoader fxml = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));	
+		    fxml.setController(this);
+			Parent menu = fxml.load();
+			productTypePane.getChildren().clear();
+			productTypePane.setCenter(menu);		
+			
+	    }
+	    @FXML
+	  public void returnFromIngredient(ActionEvent event) throws IOException {
+	    	
+	    	FXMLLoader fxml = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));	
+		    fxml.setController(this);
+			Parent menu = fxml.load();
+			ingredientListPane.getChildren().clear();
+			ingredientListPane.setCenter(menu);
+	    }  
 }
