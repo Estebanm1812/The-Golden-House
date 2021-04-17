@@ -260,6 +260,31 @@ public class RestaurantGUI {
 
     @FXML
     private TableColumn<ProductType, String> productTypeLastModified;
+    
+    @FXML
+    private ComboBox<?> deliveryCreationProductComboBox;
+
+    @FXML
+    private TextField deliveryCreationQuanitityTextField;
+
+    @FXML
+    private ComboBox<?> deliveryCreationProduct2ComboBox;
+
+    @FXML
+    private TextField deliveryCreationQuanitityTextField2;
+
+    @FXML
+    private ComboBox<?> deliveryCreationProduct3ComboBox;
+
+    @FXML
+    private TextField deliveryCreationQuanitityTextField3;
+
+    @FXML
+    private ComboBox<?> deliveryCreationEmployeeComboBox;
+
+    @FXML
+    private TextField deliveryCreationObservationsTextFields;
+
    
 	public RestaurantGUI(Restaurant restaurant) {
 	
