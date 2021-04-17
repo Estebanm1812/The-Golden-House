@@ -551,5 +551,20 @@ public class Restaurant {
 		}
 		return pos;
 	}
-	
-}
+	public void updateIngredient(Ingredient in,String change) {
+
+		for(int i=0; i < ingredientsList.size();i++) {
+			
+			if(ingredientsList.get(i).equals(in)) {
+				ingredientsList.get(i).setIngredientName(change);
+				ingredientsList.get(i).setLastModifie(currentUser.getNames()+" "+ currentUser.getLastNames());
+				try {
+					saveData(INGREDIENTS_SAVE_PATH_FILE);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					
+				}
+			}	
+		}	
+	}
+	}

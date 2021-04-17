@@ -17,14 +17,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 //import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
-import javafx.scene.control.TablePosition;
 //import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
@@ -420,6 +418,15 @@ public class RestaurantGUI {
 			public void handle(CellEditEvent<ProductType, String> event) {
 				event.getRowValue().setName(event.getNewValue());
 				event.getRowValue().setLastModifie(restaurant.getCurrentUser().getNames()+restaurant.getCurrentUser().getLastNames());
+				try {
+					restaurant.saveData(restaurant.getProductTypeSavePanth());
+				} catch (FileNotFoundException e) {
+					
+					e.printStackTrace();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
 			}
 		 });
 		 productTypeCreator.setCellValueFactory(new PropertyValueFactory<ProductType,String>("creator"));
@@ -439,7 +446,15 @@ public class RestaurantGUI {
 			@Override
 			public void handle(CellEditEvent<Customer, String> event) {
 				event.getRowValue().setNames(event.getNewValue());
-				
+				try {
+					restaurant.saveData(restaurant.getCustomersSavepath());
+				} catch (FileNotFoundException e) {
+					
+					e.printStackTrace();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
 			}
 			 
 		 });
@@ -451,7 +466,15 @@ public class RestaurantGUI {
 			@Override
 			public void handle(CellEditEvent<Customer, String> event) {
 				event.getRowValue().setLastNames(event.getNewValue());
-				
+				try {
+					restaurant.saveData(restaurant.getCustomersSavepath());
+				} catch (FileNotFoundException e) {
+					
+					e.printStackTrace();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
 			}
 			 
 		 });
@@ -464,7 +487,15 @@ public class RestaurantGUI {
 			@Override
 			public void handle(CellEditEvent<Customer, String> event) {
 				event.getRowValue().setAddres(event.getNewValue());
-				
+				try {
+					restaurant.saveData(restaurant.getCustomersSavepath());
+				} catch (FileNotFoundException e) {
+					
+					e.printStackTrace();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
 			}
 		
 		 });
@@ -475,7 +506,15 @@ public class RestaurantGUI {
 			@Override
 			public void handle(CellEditEvent<Customer, String> event) {
 				event.getRowValue().setPhoneNumber(event.getNewValue());
-				
+				try {
+					restaurant.saveData(restaurant.getCustomersSavepath());
+				} catch (FileNotFoundException e) {
+					
+					e.printStackTrace();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
 			}
 		
 		 });
@@ -495,8 +534,10 @@ public class RestaurantGUI {
 
 		@Override
 		public void handle(CellEditEvent<Ingredient, String> event) {
-			event.getRowValue().setIngredientName(event.getNewValue());
-			event.getRowValue().setLastModifie(restaurant.getCurrentUser().getNames()+ " "+restaurant.getCurrentUser().getLastNames());
+			//event.getRowValue().setIngredientName(event.getNewValue());
+			//event.getRowValue().setLastModifie(restaurant.getCurrentUser().getNames()+ " "+restaurant.getCurrentUser().getLastNames());
+			ingredientsList.refresh();
+			restaurant.updateIngredient(event.getRowValue(), event.getNewValue());
 		}
 			
 	 });
@@ -508,7 +549,15 @@ public class RestaurantGUI {
 		public void handle(CellEditEvent<Ingredient, String> event) {
 			event.getRowValue().setState("INACTIVE");
 			event.getRowValue().setLastModifie(restaurant.getCurrentUser().getNames()+" "+ restaurant.getCurrentUser().getLastNames());
-			
+			try {
+				restaurant.saveData(restaurant.getIngredientsSavePath());
+			} catch (FileNotFoundException e) {
+				
+				e.printStackTrace();
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
 		}
 		
 	});
@@ -547,7 +596,15 @@ public class RestaurantGUI {
 			public void handle(CellEditEvent<Employee, String> event) {
 				
 				event.getRowValue().setNames(event.getNewValue());
-				
+				try {
+					restaurant.saveData(restaurant.getEmployeeSavePath());
+				} catch (FileNotFoundException e) {
+					
+					e.printStackTrace();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
 			}
 			
 		});
@@ -559,7 +616,15 @@ public class RestaurantGUI {
 			@Override
 			public void handle(CellEditEvent<Employee, String> event) {
 				event.getRowValue().setNames(event.getNewValue());
-				
+				try {
+					restaurant.saveData(restaurant.getEmployeeSavePath());
+				} catch (FileNotFoundException e) {
+					
+					e.printStackTrace();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
 			}
 		
 			
@@ -590,7 +655,15 @@ public class RestaurantGUI {
 				public void handle(CellEditEvent<User, String> event) {
 		
 					event.getRowValue().setUserName(event.getNewValue());
-					
+					try {
+						restaurant.saveData(restaurant.getUsersSavePath());
+					} catch (FileNotFoundException e) {
+						
+						e.printStackTrace();
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
 				}
 				
 				
@@ -604,7 +677,15 @@ public class RestaurantGUI {
 				public void handle(CellEditEvent<User, String> event) {
 				
 					event.getRowValue().setLastNames(event.getNewValue());
-		
+					try {
+						restaurant.saveData(restaurant.getUsersSavePath());
+					} catch (FileNotFoundException e) {
+						
+						e.printStackTrace();
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
 				}
 				
 			});
