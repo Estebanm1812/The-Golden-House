@@ -3,6 +3,7 @@ package ui;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -262,30 +263,39 @@ public class RestaurantGUI {
     private TableColumn<ProductType, String> productTypeLastModified;
     
     @FXML
-    private ComboBox<?> deliveryCreationProductComboBox;
+    private ComboBox<String> deliveryCreationCustomerComboBox;
+    
+    @FXML
+    private ComboBox<String> deliveryCreationProductComboBox;
 
     @FXML
     private TextField deliveryCreationQuanitityTextField;
 
     @FXML
-    private ComboBox<?> deliveryCreationProduct2ComboBox;
+    private ComboBox<String> deliveryCreationProduct2ComboBox;
 
     @FXML
     private TextField deliveryCreationQuanitityTextField2;
 
     @FXML
-    private ComboBox<?> deliveryCreationProduct3ComboBox;
+    private ComboBox<String> deliveryCreationProduct3ComboBox;
 
     @FXML
     private TextField deliveryCreationQuanitityTextField3;
 
     @FXML
-    private ComboBox<?> deliveryCreationEmployeeComboBox;
+    private ComboBox<String> deliveryCreationEmployeeComboBox;
 
     @FXML
     private TextField deliveryCreationObservationsTextFields;
 
-   
+    @FXML
+    private BorderPane deliveryCreationPane;
+    
+    @FXML
+    private TextField deliveryCreationID;
+
+    
 	public RestaurantGUI(Restaurant restaurant) {
 	
 		this.restaurant = restaurant;
@@ -459,6 +469,7 @@ public class RestaurantGUI {
 	 }
 	 public void initializeCustomerList() {
 		 
+		 restaurant.sortCustomerByNames();
 		 ObservableList<Customer> observableList;
 		 observableList = FXCollections.observableArrayList(restaurant.getCustomerList());
 		 customerList.setItems(observableList);
@@ -473,6 +484,7 @@ public class RestaurantGUI {
 				event.getRowValue().setNames(event.getNewValue());
 				try {
 					restaurant.saveData(restaurant.getCustomersSavepath());
+					customerList.refresh();
 				} catch (FileNotFoundException e) {
 					
 					e.printStackTrace();
@@ -1494,5 +1506,98 @@ public class RestaurantGUI {
 			Parent menu = fxml.load();
 			ingredientListPane.getChildren().clear();
 			ingredientListPane.setCenter(menu);
-	    }  
+	    }
+	    @FXML
+	  public void loadDeliveryCreationPane(ActionEvent event) throws IOException {
+
+	    	FXMLLoader fxml = new FXMLLoader(getClass().getResource("deliveryCreationPane.fxml"));
+	    	fxml.setController(this);
+	    	Parent delivery = fxml.load();
+	    	mainMenuPane.getChildren().clear();
+	    	mainMenuPane.setCenter(delivery);
+	    	for(int i=0; i < restaurant.getCustomerList().size();i++) {
+	    		
+	    		String customerName = restaurant.getCustomerList().get(i).getNames()+" " + restaurant.getCustomerList().get(i).getLastNames();
+	    		deliveryCreationCustomerComboBox.getItems().add(customerName);
+	    	}
+	    	for(int i=0;i < restaurant.getProductList().size();i++) {
+	    		
+	    		String productName = restaurant.getProductList().get(i).getName();
+	    		if(restaurant.getProductList().get(i).getState().equals("ACTIVO")) {
+	    			deliveryCreationProduct2ComboBox.getItems().add(productName);
+	    			deliveryCreationProduct3ComboBox.getItems().add(productName);
+	    			deliveryCreationProductComboBox.getItems().add(productName);
+	    		}
+	    	}
+	    	for(int i=0;i < restaurant.getEmployeeList().size();i++) {
+	    		
+	    		String employeeName = restaurant.getEmployeeList().get(i).getNames()+" " + restaurant.getEmployeeList().get(i).getLastNames();
+	    		if(restaurant.getEmployeeList().get(i).getState().equals("ACTIVO")) {
+	    			deliveryCreationEmployeeComboBox.getItems().add(employeeName);
+	    		}
+	    	}
+	    }
+	    @FXML
+	  public void returnFromDeliveryCreation(ActionEvent event) throws IOException {
+
+	    	FXMLLoader fxml = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+	    	fxml.setController(this);
+	    	Parent menu = fxml.load();
+	    	deliveryCreationPane.getChildren().clear();
+	    	deliveryCreationPane.setCenter(menu);
+	    	
+	    }
+	    @FXML
+	   public void createDelivery(ActionEvent event) {
+	    	
+	    	String customer = deliveryCreationCustomerComboBox.getAccessibleText();
+	    	String product1 = deliveryCreationProductComboBox.getAccessibleText();
+	    	String product2 = deliveryCreationProduct2ComboBox.getAccessibleText();
+	    	String product3 = deliveryCreationProduct3ComboBox.getAccessibleText();
+	    	int quantity1 = Integer.parseInt(deliveryCreationQuanitityTextField.getAccessibleText());
+	    	int quantity2 = Integer.parseInt(deliveryCreationQuanitityTextField2.getAccessibleText());
+	    	int quantity3 = Integer.parseInt(deliveryCreationQuanitityTextField3.getAccessibleText());
+	    	String employee = deliveryCreationEmployeeComboBox.getAccessibleText();
+	    	String observations = deliveryCreationObservationsTextFields.getText();
+	    	String local = LocalDate.now().toString();
+	    	String [] products = new String[3];
+	    	int [] quantities = new int[3];
+	    	
+	    	if(customer.equals("")||product1.equals("")||deliveryCreationQuanitityTextField.equals("")||employee.equals("")) {
+	    		
+	    		Alert alert = new Alert(AlertType.INFORMATION);
+			    alert.setTitle("The Golden House");
+			    alert.setHeaderText("Error");
+			    alert.setContentText("Los campos obligatorios no pueden estar vacios");
+			
+			    alert.showAndWait();
+	    	}else {
+	    		
+	    		products[0] = product1;
+	    		quantities[0] = quantity1;
+	    		if(product2!="" && deliveryCreationQuanitityTextField2.getText()!="") {
+	    				products[1] = product2;
+	    				quantities[1] = quantity2;
+	    		}
+	    		if(product3!="" && deliveryCreationQuanitityTextField3.getText()!="") {
+	    			products[2] = product3;
+	    			quantities[2] = quantity3;
+	    		}
+	    		restaurant.addDelivery(customer, products, quantities, employee, observations, local);
+	    		Alert alert = new Alert(AlertType.INFORMATION);
+			    alert.setTitle("The Golden House");
+			    alert.setContentText("Se ha añadido exitosamente el Pedido");
+	    	}
+	    		
+	    }
+	    @FXML
+	   public void searchCustomerByID(ActionEvent event) {
+	    	
+	    	String id = deliveryCreationID.getText();
+	    	
+	    	int pos = restaurant.findCustomer(id);
+	    	
+	    	deliveryCreationCustomerComboBox.setAccessibleText(restaurant.getCustomerList().get(pos).getNames()+ " " + restaurant.getCustomerList().get(pos).getLastNames()); 
+	    }
+
 }

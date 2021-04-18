@@ -16,6 +16,8 @@ public class Product implements Serializable{
 	
 	private double code;
 	
+	private String state;
+	
 	public Product(String name, double prices, String sizes, String [] ingredients) {
 	
 		this.name = name;
@@ -25,6 +27,8 @@ public class Product implements Serializable{
 		this.sizes = sizes;
 		
 		this.ingredients = ingredients;
+		
+		setState("ACTIVO");
 		
 		code = (Math.random()*((1000000-00000001)+1)+0000001);
 	}
@@ -70,4 +74,11 @@ public class Product implements Serializable{
 		}
 		return all;
 	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	
 }

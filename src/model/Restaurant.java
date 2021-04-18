@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Restaurant {
@@ -112,8 +113,7 @@ public class Restaurant {
 	}
 	public void addUser(String name, String lastName, String identificatorNumber, String userName, String password) throws FileNotFoundException, IOException {
 		
-		User user1 = new User(name, lastName, identificatorNumber, userName, password);
-	
+		User user1 = new User(name, lastName, identificatorNumber, userName, password);	
 		userList.add(user1);
 		saveData(USERS_SAVE_PATH_FILE);
 		
@@ -263,14 +263,34 @@ public class Restaurant {
 	    String line = br.readLine();
 	    while(line!=null){
 	      String[] parts = line.split(";");
-	      addDelivery(parts[0],parts[1],parts[2]);
+	      String[] products = parts[1].split(",");
+	      String [] pricesLetter = parts[2].split(",");
+	      int prices[] = new int[pricesLetter.length];
+	      for(int i=0; i < prices.length;i++) {
+	    	  prices[i] =Integer.parseInt(pricesLetter[i]);
+	      }
+	      addDelivery(parts[0],products,prices,parts[3],parts[4],parts[5]);
 	      line = br.readLine();
 	    }
 	    br.close();
 	  }
-	public void addDelivery(String string, String string2, String string3) {
-	
+	@SuppressWarnings("unlikely-arg-type")
+	public void addDelivery(String customer, String [] products, int [] quantity, String employee, String observations,String date) {
 		
+		double [] prices = new double[products.length]; 
+		
+		for(int i=0; i < productList.size();i++) {
+		
+			if(products.equals(productList.get(i).getName())) {
+				
+				for(int j=0; j < products.length;j++) {
+					if(products[j]!=null) {
+						prices[j] = productList.get(i).getPrices();
+					}
+				}
+			}
+		}
+		deliveriesList.add(new Delivery(customer, products, quantity, employee, date, prices));
 	}
 	public void importUsers(String fileName) throws IOException{
 	    BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -532,6 +552,14 @@ public class Restaurant {
 	public void addProduct(String name, String [] ingredients,String size, double price) throws FileNotFoundException, IOException {
 		
 		Product product1 = new Product(name,price,size,ingredients);
+		for(int i =0; i < productList.size();i++) {
+			
+			double minor = productList.get(i).getPrices();
+			int pos = i;
+			for(int j=1+i;j < productList.size();i++ ) {
+				
+			}
+		}	
 		productList.add(product1);
 		saveData(PRODUCTS_SAVE_PATH_FILE);
 	}
@@ -567,4 +595,49 @@ public class Restaurant {
 			}	
 		}	
 	}
+	public void sortCustomerByNames() {
+		
+		ComparatorCustomer cc = new ComparatorCustomer();
+		Collections.sort(customersList,cc);
+		
+		
+		}
+	public int findCustomer(String id) {
+		
+			Long starTime = System.nanoTime();
+			
+			int found = -1;
+			
+			int i = 0;
+				
+			int j = customersList.size()-1;
+			
+			int m = 0;
+			
+			double toFind = Double.parseDouble(id);
+			
+			while(found<0 && i<=j) {
+			
+				m = (j+i)/2;	
+				
+				if(Double.parseDouble(id)==customersList.get(m).getCode()) {
+				
+					found = 1;
+				
+				}else if(toFind>customersList.get(m).getCode()){
+					i = m+1;
+					
+				}else if(toFind<customersList.get(m).getCode()){
+	}				j = m-1;
+			}
+			Long endTime = System.nanoTime();
+			Long time = starTime-endTime;
+			if(found==1) {
+				return m;
+				
+			}else {
+				return -1;
+			}
 	}
+	
+}

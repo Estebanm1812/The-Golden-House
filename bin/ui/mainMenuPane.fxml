@@ -69,6 +69,7 @@
                <children>
                   <Label layoutX="22.0" layoutY="42.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="48.0" prefWidth="156.0" style="-fx-background-color: gold;" text="Administracion de Pedidos" />
                   <Button layoutX="22.0" layoutY="206.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" text="Ver Lista De Pedidos" />
+                  <Button layoutX="46.0" layoutY="120.0" mnemonicParsing="false" onAction="#loadDeliveryCreationPane" text="Añadir Pedido" />
                </children>
             </AnchorPane>
         </items>
