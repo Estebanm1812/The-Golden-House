@@ -1548,7 +1548,7 @@ public class RestaurantGUI {
 	    	
 	    }
 	    @FXML
-	   public void createDelivery(ActionEvent event) {
+	   public void createDelivery(ActionEvent event) throws FileNotFoundException, IOException {
 	    	
 	    	String customer = deliveryCreationCustomerComboBox.getAccessibleText();
 	    	String product1 = deliveryCreationProductComboBox.getAccessibleText();
@@ -1595,9 +1595,23 @@ public class RestaurantGUI {
 	    	
 	    	String id = deliveryCreationID.getText();
 	    	
-	    	int pos = restaurant.findCustomer(id);
+	    	Long [] pos = restaurant.findCustomer(id);
 	    	
-	    	deliveryCreationCustomerComboBox.setAccessibleText(restaurant.getCustomerList().get(pos).getNames()+ " " + restaurant.getCustomerList().get(pos).getLastNames()); 
+	    	int pos2 = (int)(long)pos[0];
+	    	
+	    	if(pos2!=-1) {
+	    	
+	    	deliveryCreationCustomerComboBox.setAccessibleText(restaurant.getCustomerList().get(pos2).getNames()+ " " + restaurant.getCustomerList().get(pos2).getLastNames()); 
+	    	Alert alert = new Alert(AlertType.INFORMATION);
+		    alert.setTitle("The Golden House");
+		    alert.setContentText("Se ha encontrado el cliente usando el id\n" + restaurant.getCustomerList().get(pos2).getNames()+ " " + restaurant.getCustomerList().get(pos2).getLastNames() + " en " + pos[1]);
+	    	}else {
+	    		Alert alert = new Alert(AlertType.INFORMATION);
+			    alert.setTitle("The Golden House");
+			    alert.setHeaderText("Error");
+			    alert.setContentText("No se ha encontrado el cliente, tiempo de busqueda: " + pos[1]);
+			    
+	    	}
 	    }
 
 }

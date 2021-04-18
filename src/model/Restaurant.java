@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.JavaFXBuilderFactory;
+
 public class Restaurant {
 	
 	public final static String CUSTOMERS_SAVE_PATH_FILE = "data/customers.decade";
@@ -275,7 +279,7 @@ public class Restaurant {
 	    br.close();
 	  }
 	@SuppressWarnings("unlikely-arg-type")
-	public void addDelivery(String customer, String [] products, int [] quantity, String employee, String observations,String date) {
+	public void addDelivery(String customer, String [] products, int [] quantity, String employee, String observations,String date) throws FileNotFoundException, IOException {
 		
 		double [] prices = new double[products.length]; 
 		
@@ -289,6 +293,9 @@ public class Restaurant {
 					}
 				}
 			}
+		Delivery d = new Delivery(customer,products,quantity,employee,date,prices);
+		deliveriesList.add(d);
+		saveData(DELIVERS_SAVE_PATH_FILE);
 		}
 		deliveriesList.add(new Delivery(customer, products, quantity, employee, date, prices));
 	}
@@ -549,17 +556,9 @@ public class Restaurant {
 			}
 		return found;
 	}
-	public void addProduct(String name, String [] ingredients,String size, double price) throws FileNotFoundException, IOException {
+	public <T> void addProduct(String name, String [] ingredients,String size, double price) throws FileNotFoundException, IOException {
 		
 		Product product1 = new Product(name,price,size,ingredients);
-		for(int i =0; i < productList.size();i++) {
-			
-			double minor = productList.get(i).getPrices();
-			int pos = i;
-			for(int j=1+i;j < productList.size();i++ ) {
-				
-			}
-		}	
 		productList.add(product1);
 		saveData(PRODUCTS_SAVE_PATH_FILE);
 	}
@@ -602,7 +601,7 @@ public class Restaurant {
 		
 		
 		}
-	public int findCustomer(String id) {
+	public Long[] findCustomer(String id) {
 		
 			Long starTime = System.nanoTime();
 			
@@ -632,12 +631,19 @@ public class Restaurant {
 			}
 			Long endTime = System.nanoTime();
 			Long time = starTime-endTime;
+			Long [] returns = new Long[2];
+			
 			if(found==1) {
-				return m;
+				returns[0] = (long) m;
+				returns[1] = time;
+				
 				
 			}else {
-				return -1;
+				returns[0] = (long) -1;
+				returns[1] = time;
+				
 			}
+			return returns;
 	}
 	
 }
