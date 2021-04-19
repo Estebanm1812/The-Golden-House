@@ -33,9 +33,10 @@ public class Delivery implements Serializable{
 		this.customer = customer;
 		this.date = date;
 		this.employee = employee;
-		totalPrice = calculateTotalPrice();
 		this.amount = amount;
 		this.productPrices = productPrices;
+		totalPrice = calculateTotalPrice();
+		System.out.println(totalPrice);
 	}
 
 	public double getCode() {
@@ -100,14 +101,15 @@ public class Delivery implements Serializable{
 	public double calculateTotalPrice() {
 		
 		double total = 0;
-		System.out.println("aqui1");
-		for(int i=0; i < productList.length;i++) {
-			System.out.println("aqui1.5");
-			total+= productPrices[i]*amount[i];
+		
+		for(int i=0; i < productPrices.length;i++) {
 			
-			System.out.println("aqui2");
+			if(productPrices[i] != 0) {
+			total+= productPrices[i]*amount[i];
+			}
+			
 		}
-		System.out.println("aqui3");
+		
 		return total;
 	}
 	public double getTotalPrice() {
@@ -122,8 +124,10 @@ public class Delivery implements Serializable{
 		
 		for(int i=0; i < productList.length;i++) {
 			
+			if(productList[i] != null) {
 			products+= productList[i] + ", ";
-		}
+			}
+			}
 		
 		return products;
 	}
@@ -131,10 +135,13 @@ public class Delivery implements Serializable{
 		
 		String quantity = "";
 		
+		
 		for(int i=0; i < amount.length;i++) {
 			
+			if(amount[i]!=0) {
 			quantity+= amount[i] + ", "; 
-		}
+			}
+			}
 		
 		return quantity;
 	}

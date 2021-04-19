@@ -14,10 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.JavaFXBuilderFactory;
-
 public class Restaurant {
 	
 	public final static String CUSTOMERS_SAVE_PATH_FILE = "data/customers.decade";
@@ -285,19 +281,18 @@ public class Restaurant {
 		
 		double [] prices = new double[products.length]; 
 		
-		for(int i=0; i < products.length;i++) {
-		
-			for(int j=0; j < productList.size();j++) {
+		for(int i=0; i < productList.size();i++) {
 			
-				if(products[i].equals(productList.get(j).getName())) {
+			for(int j=0; j < products.length;j++) {
+				
+				if(products[j]!=null) {	
+				if(products[j].equals(productList.get(i).getName())) {
 					
-					if(products[i] == null) {
-					
-						prices[i] = productList.get(j).getPrices();
-						}
-					}
-				}
-		
+					prices[j] = productList.get(i).getPrices();
+				}	
+			}
+			}
+			
 		}
 		Delivery d = new Delivery(customer,products,quantity,employee,date,prices);
 		deliveriesList.add(d);
@@ -639,7 +634,7 @@ public class Restaurant {
 				}			
 			}
 			Long endTime = System.nanoTime();
-			Long time = starTime-endTime;
+			Long time = endTime-starTime;
 			Long [] returns = new Long[2];
 			
 			if(found==1) {

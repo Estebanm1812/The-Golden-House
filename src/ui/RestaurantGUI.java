@@ -342,6 +342,9 @@ public class RestaurantGUI {
     @FXML
     private TableColumn<Product, String> productTableState;
     
+    @FXML
+    private TextField BinarySearchTime;
+    
 	public RestaurantGUI(Restaurant restaurant) {
 	
 		this.restaurant = restaurant;
@@ -515,12 +518,14 @@ public class RestaurantGUI {
 	 }
 	 public void initializeDeliveryList() {
 		
+		deliveryTable.refresh();
 		ObservableList<Delivery> observableList;
 		observableList = FXCollections.observableArrayList(restaurant.getDeliveryList());
 		deliveryTable.setItems(observableList);
 		deliveryTable.setEditable(true);
 		
 		deliveryTableCustomer.setCellValueFactory(new PropertyValueFactory<Delivery,String>("customer"));
+		deliveryTableCustomer.setCellFactory(TextFieldTableCell.forTableColumn());
 		deliveryTableCustomer.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,String>>(){
 
 			@Override
@@ -556,6 +561,7 @@ public class RestaurantGUI {
 			);
 	 
 		deliveryTableProducts.setCellValueFactory(new PropertyValueFactory<Delivery,String>("ProductsList"));
+		deliveryTableProducts.setCellFactory(TextFieldTableCell.forTableColumn());
 		deliveryTableProducts.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,String>>(){
 
 			@Override
@@ -590,6 +596,7 @@ if(event.getRowValue().getState().equals("SOLICITADO")) {
 			}
 		});
 		deliveryTableQuantity.setCellValueFactory(new PropertyValueFactory<Delivery,String>("quanty"));
+		deliveryTableQuantity.setCellFactory(TextFieldTableCell.forTableColumn());
 		deliveryTableQuantity.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,String>>(){
 
 			@Override
@@ -624,6 +631,7 @@ if(event.getRowValue().getState().equals("SOLICITADO")) {
 			}
 		});
 		deliveryTablePrice.setCellValueFactory(new PropertyValueFactory<Delivery,String>("prices"));
+		deliveryTablePrice.setCellFactory(TextFieldTableCell.forTableColumn());
 		deliveryTablePrice.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,String>>(){
 
 			@Override
@@ -659,6 +667,7 @@ if(event.getRowValue().getState().equals("SOLICITADO")) {
 		}
 		);
 		deliveryTableEmployee.setCellValueFactory(new PropertyValueFactory<Delivery,String>("employee"));
+		deliveryTableEmployee.setCellFactory(TextFieldTableCell.forTableColumn());
 		deliveryTableEmployee.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,String>>(){
 
 			@Override
@@ -692,7 +701,7 @@ if(event.getRowValue().getState().equals("SOLICITADO")) {
 			}
 			
 		});
-		deliveryTableTotalPrice.setCellValueFactory(new PropertyValueFactory<Delivery,Double>("totalPrice"));
+		deliveryTableTotalPrice.setCellValueFactory(new PropertyValueFactory<Delivery,Double>("TotalPrice"));
 		deliveryTableTotalPrice.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,Double>>(){
 
 			@Override
@@ -728,6 +737,7 @@ if(event.getRowValue().getState().equals("SOLICITADO")) {
 			
 		});
 		deliveryTableDate.setCellValueFactory(new PropertyValueFactory<Delivery,String>("date"));
+		deliveryTableDate.setCellFactory(TextFieldTableCell.forTableColumn());
 		deliveryTableDate.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,String>>(){
 
 			@Override
@@ -762,6 +772,7 @@ if(event.getRowValue().getState().equals("SOLICITADO")) {
 			
 		});
 		deliveryTableState.setCellValueFactory(new PropertyValueFactory<Delivery,String>("state"));
+		deliveryTableState.setCellFactory(TextFieldTableCell.forTableColumn());
 		deliveryTableState.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,String>>(){
 
 			@Override
@@ -1874,10 +1885,10 @@ if(event.getRowValue().getState().equals("SOLICITADO")) {
 	    @FXML
 	   public void createDelivery(ActionEvent event) throws FileNotFoundException, IOException {
 	    	
-	    	String customer = deliveryCreationCustomerComboBox.getAccessibleText();
-	    	String product1 = deliveryCreationProductComboBox.getAccessibleText();
-	    	String product2 = deliveryCreationProduct2ComboBox.getAccessibleText();
-	    	String product3 = deliveryCreationProduct3ComboBox.getAccessibleText();
+	    	String customer = deliveryCreationCustomerComboBox.getValue();
+	    	String product1 = deliveryCreationProductComboBox.getValue();
+	    	String product2 = deliveryCreationProduct2ComboBox.getValue();
+	    	String product3 = deliveryCreationProduct3ComboBox.getValue();
 	    	int quantity1 = Integer.parseInt(deliveryCreationQuanitityTextField.getText());
 	    	int quantity2 = 0;
 	    	int quantity3 = 0;
@@ -1889,7 +1900,7 @@ if(event.getRowValue().getState().equals("SOLICITADO")) {
 	    			
 	    		quantity3 = Integer.parseInt(deliveryCreationQuanitityTextField3.getText());
 	    	}
-	    	String employee = deliveryCreationEmployeeComboBox.getAccessibleText();
+	    	String employee = deliveryCreationEmployeeComboBox.getValue();
 	    	String observations = deliveryCreationObservationsTextFields.getText();
 	    	String local = LocalDate.now().toString();
 	    	String [] products = new String[3];
@@ -1903,7 +1914,7 @@ if(event.getRowValue().getState().equals("SOLICITADO")) {
 			    alert.setContentText("Los campos obligatorios no pueden estar vacios");
 			
 			    alert.showAndWait();
-	    	}else {
+	    	}else if(customer!="" && product1 != "" && deliveryCreationQuanitityTextField.getText()!=""&& employee!="" ){
 	    		
 	    		products[0] = product1;
 	    		quantities[0] = quantity1;
@@ -1933,8 +1944,10 @@ if(event.getRowValue().getState().equals("SOLICITADO")) {
 	    	
 	    	if(pos2!=-1) {
 	    	
-	    	deliveryCreationCustomerComboBox.setAccessibleText(restaurant.getCustomerList().get(pos2).getNames()+ " " + restaurant.getCustomerList().get(pos2).getLastNames()); 
-	    
+	    	deliveryCreationCustomerComboBox.setValue(restaurant.getCustomerList().get(pos2).getNames()+ " " + restaurant.getCustomerList().get(pos2).getLastNames()); 
+	    	int time0 = (int)(long)pos[1];
+	    	String time = Integer.toString(time0);
+	    	BinarySearchTime.setText(time);
 		    TextInputDialog dialog = new TextInputDialog("");
 			  dialog.setTitle("The Golden House");
 			  dialog.setHeaderText("");

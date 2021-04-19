@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.BorderPane?>
 
 
-<BorderPane fx:id="deliveryListPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="deliveryListPane" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <TableView fx:id="deliveryTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="deliveryTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="453.0" prefWidth="666.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="deliveryTableCustomer" prefWidth="95.0" text="Cliente" />
           <TableColumn fx:id="deliveryTableProducts" prefWidth="111.0" text="Productos" />
@@ -18,8 +18,8 @@
             <TableColumn fx:id="deliveryTablePrice" prefWidth="71.0" text="Precio Unitario" />
             <TableColumn fx:id="deliveryTableEmployee" prefWidth="82.0" text="Empleado" />
             <TableColumn fx:id="deliveryTableTotalPrice" prefWidth="53.0" text="Total" />
-            <TableColumn fx:id="deliveryTableDate" prefWidth="45.0" text="Fecha" />
-            <TableColumn fx:id="deliveryTableState" prefWidth="73.0" text="Estado" />
+            <TableColumn fx:id="deliveryTableDate" prefWidth="68.0" text="Fecha" />
+            <TableColumn fx:id="deliveryTableState" prefWidth="116.0" text="Estado" />
         </columns>
       </TableView>
    </center>
@@ -31,9 +31,10 @@
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" onAction="#openExplanation" text="Ayuda">
+          <Menu mnemonicParsing="false" text="Ayuda">
             <items>
               <MenuItem mnemonicParsing="false" text="Delete" />
+                  <MenuItem mnemonicParsing="false" onAction="#openExplanation" text="Explicacion" />
             </items>
           </Menu>
         </menus>
