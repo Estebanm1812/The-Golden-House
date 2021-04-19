@@ -1,7 +1,7 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
+
 
 public class Delivery implements Serializable{
 
@@ -35,6 +35,7 @@ public class Delivery implements Serializable{
 		this.employee = employee;
 		totalPrice = calculateTotalPrice();
 		this.amount = amount;
+		this.productPrices = productPrices;
 	}
 
 	public double getCode() {
@@ -99,13 +100,14 @@ public class Delivery implements Serializable{
 	public double calculateTotalPrice() {
 		
 		double total = 0;
-		
+		System.out.println("aqui1");
 		for(int i=0; i < productList.length;i++) {
-		
-			total+= productPrices[i] * amount[i];
+			System.out.println("aqui1.5");
+			total+= productPrices[i]*amount[i];
 			
-			
+			System.out.println("aqui2");
 		}
+		System.out.println("aqui3");
 		return total;
 	}
 	public double getTotalPrice() {
@@ -113,6 +115,38 @@ public class Delivery implements Serializable{
 	}
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+	public String getProductsList() {
+		
+		String products = "";
+		
+		for(int i=0; i < productList.length;i++) {
+			
+			products+= productList[i] + ", ";
+		}
+		
+		return products;
+	}
+	public String getQuanty() {
+		
+		String quantity = "";
+		
+		for(int i=0; i < amount.length;i++) {
+			
+			quantity+= amount[i] + ", "; 
+		}
+		
+		return quantity;
+	}
+	public String getPrices() {
+		
+		String prices = "";
+		
+		for(int i=0; i < productPrices.length;i++) {
+			prices += productPrices[i] + " ,";
+			
+		}	
+		return prices;
 	}
 	
 }

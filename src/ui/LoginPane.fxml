@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="firstPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <top>
@@ -29,11 +28,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="43.0" prefWidth="200.0" style="-fx-border-color: gold; -fx-background-color: gold;" text="Hacer Pedido" translateX="5.0" translateY="30.0" GridPane.columnIndex="1">
-               <font>
-                  <Font name="Times New Roman Italic" size="17.0" />
-               </font></Button>
-            <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="123.0" style="-fx-background-color: gold;" text="Entrar como usuario" translateX="40.0" translateY="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button maxWidth="-Infinity" mnemonicParsing="false" onAction="#login" prefHeight="55.0" prefWidth="143.0" style="-fx-background-color: gold;" text="Entrar como usuario" translateX="40.0" translateY="30.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </center>

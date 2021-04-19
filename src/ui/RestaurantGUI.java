@@ -29,8 +29,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import model.Customer;
+import model.Delivery;
 import model.Employee;
 import model.Ingredient;
+import model.Product;
 import model.ProductType;
 import model.Restaurant;
 import model.User;
@@ -294,7 +296,51 @@ public class RestaurantGUI {
     
     @FXML
     private TextField deliveryCreationID;
+    
+    @FXML
+    private BorderPane deliveryListPane;
 
+    @FXML
+    private TableView<Delivery> deliveryTable;
+
+    @FXML
+    private TableColumn<Delivery, String> deliveryTableCustomer;
+
+    @FXML
+    private TableColumn<Delivery, String> deliveryTableProducts;
+
+    @FXML
+    private TableColumn<Delivery, String> deliveryTableQuantity;
+
+    @FXML
+    private TableColumn<Delivery, String> deliveryTablePrice;
+
+    @FXML
+    private TableColumn<Delivery, String> deliveryTableEmployee;
+
+    @FXML
+    private TableColumn<Delivery, Double> deliveryTableTotalPrice;
+
+    @FXML
+    private TableColumn<Delivery, String> deliveryTableDate;
+
+    @FXML
+    private TableColumn<Delivery, String> deliveryTableState;
+    
+    @FXML
+    private BorderPane productListPane;
+
+    @FXML
+    private TableView<Product> productListTable;
+
+    @FXML
+    private TableColumn<Product, String> productTableName;
+
+    @FXML
+    private TableColumn<Product, Double> productTablePrice;
+
+    @FXML
+    private TableColumn<Product, String> productTableState;
     
 	public RestaurantGUI(Restaurant restaurant) {
 	
@@ -466,6 +512,282 @@ public class RestaurantGUI {
 		 });
 		 productTypeCreator.setCellValueFactory(new PropertyValueFactory<ProductType,String>("creator"));
 		 productTypeLastModified.setCellValueFactory(new PropertyValueFactory<ProductType,String>("lastModified"));
+	 }
+	 public void initializeDeliveryList() {
+		
+		ObservableList<Delivery> observableList;
+		observableList = FXCollections.observableArrayList(restaurant.getDeliveryList());
+		deliveryTable.setItems(observableList);
+		deliveryTable.setEditable(true);
+		
+		deliveryTableCustomer.setCellValueFactory(new PropertyValueFactory<Delivery,String>("customer"));
+		deliveryTableCustomer.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,String>>(){
+
+			@Override
+			public void handle(CellEditEvent<Delivery, String> event) {
+				
+				if(event.getRowValue().getState().equals("SOLICITADO")) {
+					
+					event.getRowValue().setState("EN PROCESO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				}else if(event.getRowValue().getState().equals("EN PROCESO")) {
+					event.getRowValue().setState("ENVIADO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				}else if(event.getRowValue().getState().equals("ENVIADO")) {
+					event.getRowValue().setState("ENTREGADO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+			
+						e.printStackTrace();
+					}
+				}	
+			}}
+			);
+	 
+		deliveryTableProducts.setCellValueFactory(new PropertyValueFactory<Delivery,String>("ProductsList"));
+		deliveryTableProducts.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,String>>(){
+
+			@Override
+			public void handle(CellEditEvent<Delivery, String> event) {
+				
+if(event.getRowValue().getState().equals("SOLICITADO")) {
+					
+					event.getRowValue().setState("EN PROCESO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				}else if(event.getRowValue().getState().equals("EN PROCESO")) {
+					event.getRowValue().setState("ENVIADO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				}else if(event.getRowValue().getState().equals("ENVIADO")) {
+					event.getRowValue().setState("ENTREGADO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+			
+						e.printStackTrace();
+					}
+			}
+			}
+		});
+		deliveryTableQuantity.setCellValueFactory(new PropertyValueFactory<Delivery,String>("quanty"));
+		deliveryTableQuantity.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,String>>(){
+
+			@Override
+			public void handle(CellEditEvent<Delivery, String> event) {
+			if(event.getRowValue().getState().equals("SOLICITADO")) {
+					
+					event.getRowValue().setState("EN PROCESO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				}else if(event.getRowValue().getState().equals("EN PROCESO")) {
+					event.getRowValue().setState("ENVIADO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				}else if(event.getRowValue().getState().equals("ENVIADO")) {
+					event.getRowValue().setState("ENTREGADO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+			
+						e.printStackTrace();
+					}
+				
+			}
+			}
+		});
+		deliveryTablePrice.setCellValueFactory(new PropertyValueFactory<Delivery,String>("prices"));
+		deliveryTablePrice.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,String>>(){
+
+			@Override
+			public void handle(CellEditEvent<Delivery, String> event) {
+				
+				if(event.getRowValue().getState().equals("SOLICITADO")) {
+					
+					event.getRowValue().setState("EN PROCESO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				}else if(event.getRowValue().getState().equals("EN PROCESO")) {
+					event.getRowValue().setState("ENVIADO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				}else if(event.getRowValue().getState().equals("ENVIADO")) {
+					event.getRowValue().setState("ENTREGADO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+			
+						e.printStackTrace();
+					}
+			}
+			}
+		}
+		);
+		deliveryTableEmployee.setCellValueFactory(new PropertyValueFactory<Delivery,String>("employee"));
+		deliveryTableEmployee.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,String>>(){
+
+			@Override
+			public void handle(CellEditEvent<Delivery, String> event) {
+			if(event.getRowValue().getState().equals("SOLICITADO")) {
+					
+					event.getRowValue().setState("EN PROCESO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				}else if(event.getRowValue().getState().equals("EN PROCESO")) {
+					event.getRowValue().setState("ENVIADO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				}else if(event.getRowValue().getState().equals("ENVIADO")) {
+					event.getRowValue().setState("ENTREGADO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+			
+						e.printStackTrace();
+					}
+				}	
+			}
+			
+		});
+		deliveryTableTotalPrice.setCellValueFactory(new PropertyValueFactory<Delivery,Double>("totalPrice"));
+		deliveryTableTotalPrice.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,Double>>(){
+
+			@Override
+			public void handle(CellEditEvent<Delivery, Double> event) {
+if(event.getRowValue().getState().equals("SOLICITADO")) {
+					
+					event.getRowValue().setState("EN PROCESO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				}else if(event.getRowValue().getState().equals("EN PROCESO")) {
+					event.getRowValue().setState("ENVIADO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				}else if(event.getRowValue().getState().equals("ENVIADO")) {
+					event.getRowValue().setState("ENTREGADO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+			
+						e.printStackTrace();
+					}
+				}	
+			}
+			
+			
+		});
+		deliveryTableDate.setCellValueFactory(new PropertyValueFactory<Delivery,String>("date"));
+		deliveryTableDate.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,String>>(){
+
+			@Override
+			public void handle(CellEditEvent<Delivery, String> event) {
+if(event.getRowValue().getState().equals("SOLICITADO")) {
+					
+					event.getRowValue().setState("EN PROCESO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				}else if(event.getRowValue().getState().equals("EN PROCESO")) {
+					event.getRowValue().setState("ENVIADO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+				}else if(event.getRowValue().getState().equals("ENVIADO")) {
+					event.getRowValue().setState("ENTREGADO");
+					try {
+						restaurant.saveData(restaurant.getDeliverySavePath());
+					} catch (IOException e) {
+			
+						e.printStackTrace();
+					}
+				}	
+			}
+			
+		});
+		deliveryTableState.setCellValueFactory(new PropertyValueFactory<Delivery,String>("state"));
+		deliveryTableState.setOnEditCommit(new EventHandler<CellEditEvent<Delivery,String>>(){
+
+			@Override
+			public void handle(CellEditEvent<Delivery, String> event) {
+				
+				event.getRowValue().setState("CANCELADO");
+				try {
+					restaurant.saveData(restaurant.getDeliverySavePath());
+				} catch (IOException e) {
+				
+					e.printStackTrace();
+				}
+			}
+			
+		});
+	 }
+	 public void initializeProductList() {
+		 
+		 ObservableList<Product> observableList;
+		 observableList = FXCollections.observableArrayList(restaurant.getProductList());
+		 productListTable.setItems(observableList);
+		 
+		 productTableName.setCellValueFactory(new PropertyValueFactory<Product,String>("name"));
+		 productTablePrice.setCellValueFactory(new PropertyValueFactory<Product,Double>("prices"));
+		 productTableState.setCellValueFactory(new PropertyValueFactory<Product,String>("state"));
+		 
 	 }
 	 public void initializeCustomerList() {
 		 
@@ -1107,43 +1429,43 @@ public class RestaurantGUI {
 		  
 		  int count = 0;
 		  
-		  if((productIngredientComboBox.getAccessibleText().equals(""))==false) {
+		  if((productIngredientComboBox.getAccessibleText())!="") {
 			  count+=1;
 			  
 		  }
-		  if((productIngredientComboBox2.getAccessibleText().equals(""))==false) {
+		  if((productIngredientComboBox2.getAccessibleText())!="") {
 			  count+=1;
 			  
 		  }
-		  if((productIngredientComboBox3.getAccessibleText().equals(""))==false) {
+		  if((productIngredientComboBox3.getAccessibleText())!="") {
 			  count+=1;
 			  
 		  }
-		  if((productIngredientComboBox4.getAccessibleText().equals(""))==false) {
+		  if((productIngredientComboBox4.getAccessibleText())!="") {
 			  count+=1;
 			  
 		  }
-		  if((productIngredientComboBox5.getAccessibleText().equals(""))==false) {
+		  if((productIngredientComboBox5.getAccessibleText())!="") {
 			  count+=1;
 			  
 		  }
-		  if((productIngredientComboBox6.getAccessibleText().equals(""))==false) {
+		  if((productIngredientComboBox6.getAccessibleText())!="") {
 			  count+=1;
 			  
 		  }
-		  if((productIngredientComboBox7.getAccessibleText().equals(""))==false) {
+		  if((productIngredientComboBox7.getAccessibleText())!="") {
 			  count+=1;
 			  
 		  }
-		  if((productIngredientComboBox8.getAccessibleText().equals(""))==false) {
+		  if((productIngredientComboBox8.getAccessibleText())!="") {
 			  count+=1;
 			  
 		  }
-		  if((productIngredientComboBox9.getAccessibleText().equals(""))==false) {
+		  if((productIngredientComboBox9.getAccessibleText())!="") {
 			  count+=1;
 			  
 		  }
-		  if((productIngredientComboBox10.getAccessibleText().equals(""))==false) {
+		  if((productIngredientComboBox10.getAccessibleText())!="") {
 			  count+=1;
 			  
 		  }
@@ -1152,63 +1474,63 @@ public class RestaurantGUI {
 		  for(int i=0; i < count && added!=count;i++) {
 		  boolean out = false;
 			  
-			  if(ingredients[i].isEmpty() && out==false) {
+			  if(ingredients[i]==null && out==false) {
 			  
-				  if(productIngredientComboBox.getAccessibleText().equals("")!=false) {
+				  if(productIngredientComboBox.getAccessibleText()!="") {
 				  
 					  ingredients[i] = productIngredientComboBox.getAccessibleText();
 					  out = true;
 					  added+=1;
 				  }
-				  if(productIngredientComboBox2.getAccessibleText().equals("")!=false) {
+				  if(productIngredientComboBox2.getAccessibleText()!="") {
 					  
 					  ingredients[i] = productIngredientComboBox2.getAccessibleText();
 					  out = true;
 					  added+=1;
 				  }
-				  if(productIngredientComboBox3.getAccessibleText().equals("")!=false) {
+				  if(productIngredientComboBox3.getAccessibleText()!="") {
 					  
 					  ingredients[i] = productIngredientComboBox3.getAccessibleText();
 					  out = true;
 					  added+=1;
 				  }
-				  if(productIngredientComboBox4.getAccessibleText().equals("")!=false) {
+				  if(productIngredientComboBox4.getAccessibleText()!="") {
 					  
 					  ingredients[i] = productIngredientComboBox4.getAccessibleText();
 					  out = true;
 					  added+=1;
 				  }
-				  if(productIngredientComboBox5.getAccessibleText().equals("")!=false) {
+				  if(productIngredientComboBox5.getAccessibleText()!="") {
 					  
 					  ingredients[i] = productIngredientComboBox5.getAccessibleText();
 					  out = true;
 					  added+=1;
 				  }
-				  if(productIngredientComboBox6.getAccessibleText().equals("")!=false) {
+				  if(productIngredientComboBox6.getAccessibleText()!="") {
 					  
 					  ingredients[i] = productIngredientComboBox6.getAccessibleText();
 					  out = true;
 					  added+=1;
 				  }
-				  if(productIngredientComboBox7.getAccessibleText().equals("")!=false) {
+				  if(productIngredientComboBox7.getAccessibleText()!="") {
 					  
 					  ingredients[i] = productIngredientComboBox7.getAccessibleText();
 					  out = true;
 					  added+=1;
 				  }
-				  if(productIngredientComboBox8.getAccessibleText().equals("")!=false) {
+				  if(productIngredientComboBox8.getAccessibleText()!="") {
 					  
 					  ingredients[i] = productIngredientComboBox8.getAccessibleText();
 					  out = true;
 					  added+=1;
 				  }
-				  if(productIngredientComboBox9.getAccessibleText().equals("")!=false) {
+				  if(productIngredientComboBox9.getAccessibleText()!="") {
 					  
 					  ingredients[i] = productIngredientComboBox9.getAccessibleText();
 					  out = true;
 					  added+=1;
 				  }
-				  if(productIngredientComboBox10.getAccessibleText().equals("")!=false) {
+				  if(productIngredientComboBox10.getAccessibleText()!="") {
 					  
 					  ingredients[i] = productIngredientComboBox10.getAccessibleText();
 					  out = true;
@@ -1218,7 +1540,7 @@ public class RestaurantGUI {
 		  }
 		  boolean found = restaurant.findProduct(name, ingredients,price);
 		  
-		  if((productNameTxT.getText().equals(""))||(productPriceTxT.getText().equals(""))||(size.equals(""))||productIngredientComboBox.getAccessibleText().equals("")){
+		  if((name!= "")||(productPriceTxT.getText().equals(""))||(size!="")||productIngredientComboBox.getAccessibleText().equals("")){
 		  
 			  Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information Dialog");
@@ -1536,6 +1858,8 @@ public class RestaurantGUI {
 	    			deliveryCreationEmployeeComboBox.getItems().add(employeeName);
 	    		}
 	    	}
+	    	deliveryCreationQuanitityTextField2.setText("0");
+	    	deliveryCreationQuanitityTextField3.setText("0");
 	    }
 	    @FXML
 	  public void returnFromDeliveryCreation(ActionEvent event) throws IOException {
@@ -1554,16 +1878,24 @@ public class RestaurantGUI {
 	    	String product1 = deliveryCreationProductComboBox.getAccessibleText();
 	    	String product2 = deliveryCreationProduct2ComboBox.getAccessibleText();
 	    	String product3 = deliveryCreationProduct3ComboBox.getAccessibleText();
-	    	int quantity1 = Integer.parseInt(deliveryCreationQuanitityTextField.getAccessibleText());
-	    	int quantity2 = Integer.parseInt(deliveryCreationQuanitityTextField2.getAccessibleText());
-	    	int quantity3 = Integer.parseInt(deliveryCreationQuanitityTextField3.getAccessibleText());
+	    	int quantity1 = Integer.parseInt(deliveryCreationQuanitityTextField.getText());
+	    	int quantity2 = 0;
+	    	int quantity3 = 0;
+	    	if(deliveryCreationQuanitityTextField2.getText()!="") {
+	    	
+	    	quantity2 = Integer.parseInt(deliveryCreationQuanitityTextField2.getText());
+	    	}
+	    	if(deliveryCreationQuanitityTextField3.getText()!="") {
+	    			
+	    		quantity3 = Integer.parseInt(deliveryCreationQuanitityTextField3.getText());
+	    	}
 	    	String employee = deliveryCreationEmployeeComboBox.getAccessibleText();
 	    	String observations = deliveryCreationObservationsTextFields.getText();
 	    	String local = LocalDate.now().toString();
 	    	String [] products = new String[3];
 	    	int [] quantities = new int[3];
 	    	
-	    	if(customer.equals("")||product1.equals("")||deliveryCreationQuanitityTextField.equals("")||employee.equals("")) {
+	    	if((customer=="")||(product1=="")||(deliveryCreationQuanitityTextField.getText()=="")||(employee=="")) {
 	    		
 	    		Alert alert = new Alert(AlertType.INFORMATION);
 			    alert.setTitle("The Golden House");
@@ -1575,11 +1907,11 @@ public class RestaurantGUI {
 	    		
 	    		products[0] = product1;
 	    		quantities[0] = quantity1;
-	    		if(product2!="" && deliveryCreationQuanitityTextField2.getText()!="") {
+	    		if(product2!="" && deliveryCreationQuanitityTextField2.getText()!="0") {
 	    				products[1] = product2;
 	    				quantities[1] = quantity2;
 	    		}
-	    		if(product3!="" && deliveryCreationQuanitityTextField3.getText()!="") {
+	    		if(product3!="" && deliveryCreationQuanitityTextField3.getText()!="0") {
 	    			products[2] = product3;
 	    			quantities[2] = quantity3;
 	    		}
@@ -1602,16 +1934,66 @@ public class RestaurantGUI {
 	    	if(pos2!=-1) {
 	    	
 	    	deliveryCreationCustomerComboBox.setAccessibleText(restaurant.getCustomerList().get(pos2).getNames()+ " " + restaurant.getCustomerList().get(pos2).getLastNames()); 
+	    
+		    TextInputDialog dialog = new TextInputDialog("");
+			  dialog.setTitle("The Golden House");
+			  dialog.setHeaderText("");
+			  dialog.setContentText("Se ha encontrado el cliente usando el id\n" + restaurant.getCustomerList().get(pos2).getNames()+ " " + restaurant.getCustomerList().get(pos2).getLastNames() + " en " + pos[1]);
+	    	}else {
+	    	TextInputDialog dialog = new TextInputDialog("");		
+	    	dialog.setTitle("The Golden House");
+				  dialog.setHeaderText("");
+				  dialog.setContentText("No se ha encontrado el cliente, tiempo de busqueda: \n" + pos[1]);
+	    	}
+	    	
+	    }
+	    @FXML
+	  public void loadDeliveryList(ActionEvent event) throws IOException {
+	    	FXMLLoader fxml = new FXMLLoader(getClass().getResource("deliveryListPane.fxml"));
+	    	fxml.setController(this);
+	    	Parent list = fxml.load();
+	    	mainMenuPane.getChildren().clear();
+	    	mainMenuPane.setCenter(list);
+	    	initializeDeliveryList();
+	    	
+	    }
+	    @FXML
+	    public void openExplanation(ActionEvent event) {
+	    	
 	    	Alert alert = new Alert(AlertType.INFORMATION);
 		    alert.setTitle("The Golden House");
-		    alert.setContentText("Se ha encontrado el cliente usando el id\n" + restaurant.getCustomerList().get(pos2).getNames()+ " " + restaurant.getCustomerList().get(pos2).getLastNames() + " en " + pos[1]);
-	    	}else {
-	    		Alert alert = new Alert(AlertType.INFORMATION);
-			    alert.setTitle("The Golden House");
-			    alert.setHeaderText("Error");
-			    alert.setContentText("No se ha encontrado el cliente, tiempo de busqueda: " + pos[1]);
-			    
-	    	}
+		    alert.setHeaderText("INFO");
+		    alert.setContentText("Para Cambiar el estado de un pedido haga doble click en cualquier celda menos la de Estado.\n" + "Al Hacer doble click en la celda de Estado se cancela el pedido");
 	    }
 
+	    @FXML
+	   public void returnToMainMenuFromDeliveryList(ActionEvent event) throws IOException {
+	    	FXMLLoader fxml = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+	    	fxml.setController(this);
+	    	Parent list = fxml.load();
+	    	deliveryListPane.getChildren().clear();
+	    	deliveryListPane.setCenter(list);
+	    
+	    	
+	    }
+	   @FXML
+	   public void openProductList(ActionEvent event) throws IOException {
+		   
+		   FXMLLoader fxml = new FXMLLoader(getClass().getResource("productListPane.fxml"));
+		   fxml.setController(this);
+		   Parent list = fxml.load();
+		   mainMenuPane.getChildren().clear();
+		   mainMenuPane.setCenter(list);
+		   initializeProductList();
+	    }
+	   @FXML
+	  public  void returntoMainMenuFromProductList(ActionEvent event) throws IOException {
+		   
+		   FXMLLoader fxml = new FXMLLoader(getClass().getResource("mainMenuPane.fxml"));
+		   fxml.setController(this);
+		   Parent list = fxml.load();
+		   productListPane.getChildren().clear();
+		   productListPane.setCenter(list);
+		   
+	    }
 }

@@ -188,6 +188,9 @@ public class Restaurant {
 	public List<ProductType> getProductTypeList(){
 		return productTypeList;
 	}
+	public List<Delivery> getDeliveryList(){
+		return deliveriesList;
+	}
 	
 	public void setEmployeeList(ArrayList<Employee> employersList) {
 		this.employersList = employersList;
@@ -278,25 +281,27 @@ public class Restaurant {
 	    }
 	    br.close();
 	  }
-	@SuppressWarnings("unlikely-arg-type")
 	public void addDelivery(String customer, String [] products, int [] quantity, String employee, String observations,String date) throws FileNotFoundException, IOException {
 		
 		double [] prices = new double[products.length]; 
 		
-		for(int i=0; i < productList.size();i++) {
+		for(int i=0; i < products.length;i++) {
 		
-			if(products.equals(productList.get(i).getName())) {
-				
-				for(int j=0; j < products.length;j++) {
-					if(products[j]!=null) {
-						prices[j] = productList.get(i).getPrices();
+			for(int j=0; j < productList.size();j++) {
+			
+				if(products[i].equals(productList.get(j).getName())) {
+					
+					if(products[i] == null) {
+					
+						prices[i] = productList.get(j).getPrices();
+						}
 					}
 				}
-			}
+		
+		}
 		Delivery d = new Delivery(customer,products,quantity,employee,date,prices);
 		deliveriesList.add(d);
 		saveData(DELIVERS_SAVE_PATH_FILE);
-		}
 		deliveriesList.add(new Delivery(customer, products, quantity, employee, date, prices));
 	}
 	public void importUsers(String fileName) throws IOException{
@@ -619,15 +624,19 @@ public class Restaurant {
 			
 				m = (j+i)/2;	
 				
-				if(Double.parseDouble(id)==customersList.get(m).getCode()) {
-				
+				if(Double.parseDouble(id)==(Double.parseDouble(customersList.get(m).getIdentificatorNumber()))) {
+					
 					found = 1;
-				
-				}else if(toFind>customersList.get(m).getCode()){
+					
+				}else if(toFind>(Double.parseDouble(customersList.get(m).getIdentificatorNumber()))){
+					
 					i = m+1;
 					
-				}else if(toFind<customersList.get(m).getCode()){
-	}				j = m-1;
+				}else if((Double.parseDouble(customersList.get(m).getIdentificatorNumber()))>toFind){
+					
+					j = m-1;
+					
+				}			
 			}
 			Long endTime = System.nanoTime();
 			Long time = starTime-endTime;
@@ -643,6 +652,7 @@ public class Restaurant {
 				returns[1] = time;
 				
 			}
+			
 			return returns;
 	}
 	
