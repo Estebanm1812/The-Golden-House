@@ -1,0 +1,1 @@
+No se habia hecho la primera entrega del Proyecto por lo que se mejoro todo en ese sentido

@@ -488,7 +488,8 @@ public class RestaurantGUI {
 		 
 	    }
 	 public void initializeProductTypeList() {
-		
+		 
+		 producTypetList.refresh();
 		 ObservableList<ProductType> observableList;
 		 observableList = FXCollections.observableArrayList(restaurant.getProductTypeList());
 		 producTypetList.setItems(observableList);
